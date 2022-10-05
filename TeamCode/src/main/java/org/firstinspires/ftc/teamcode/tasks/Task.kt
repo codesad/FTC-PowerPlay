@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.tasks
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+import org.firstinspires.ftc.teamcode.OpModes.StateOpMode
 
 enum class TaskState {
     RUNNING,
@@ -11,8 +11,8 @@ abstract class Task {
     var state = TaskState.RUNNING
     open fun tick() {}
     abstract fun run()
-    lateinit var context: LinearOpMode
-    fun start(ctx: LinearOpMode) {
+    lateinit var context: StateOpMode
+    fun start(ctx: StateOpMode) {
         state = TaskState.RUNNING
         context = ctx
         run()

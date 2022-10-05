@@ -9,7 +9,6 @@ import org.firstinspires.ftc.teamcode.tasks.TaskState
 import kotlin.Throws
 
 abstract class StateOpMode : LinearOpMode() {
-    private var state = 0
     lateinit var mecanum: Mecanum
     open val task: Task = InlineTask {}
     open fun onInit() {}
