@@ -2,15 +2,9 @@ package org.firstinspires.ftc.teamcode.OpModes
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import org.firstinspires.ftc.teamcode.Common.Mecanum
-import org.firstinspires.ftc.teamcode.tasks.InlineTask
-import org.firstinspires.ftc.teamcode.tasks.SyncTasks
-import org.firstinspires.ftc.teamcode.tasks.Task
-import org.firstinspires.ftc.teamcode.tasks.TaskState
-import kotlin.Throws
 
-abstract class StateOpMode : LinearOpMode() {
+open class ImplOpMode : LinearOpMode() {
     lateinit var mecanum: Mecanum
-    open val task: Task = InlineTask {}
     open fun onInit() {}
     open fun onLoop() {}
     open fun onEnd() {}
@@ -19,10 +13,8 @@ abstract class StateOpMode : LinearOpMode() {
         mecanum = Mecanum(this.hardwareMap)
         onInit()
         waitForStart()
-        task.start(this)
         while (opModeIsActive()) {
             onLoop()
-            if (task.state == TaskState.RUNNING) task.tick()
             telemetry.update()
         }
         onEnd()

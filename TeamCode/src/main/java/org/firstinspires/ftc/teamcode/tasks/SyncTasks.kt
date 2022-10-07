@@ -4,25 +4,26 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import org.firstinspires.ftc.teamcode.tasks.Task
 import org.firstinspires.ftc.teamcode.tasks.TaskState
 
-class SyncTasks(private vararg val childTasks: Task) : Task() {
+class SyncTasks() : Task() {
     var currentTask = 0
+
     override fun tick() {
-        childTasks[currentTask].tick()
-        if (childTasks[currentTask].state == TaskState.FINISHED) {
+        children[currentTask].tick()
+        if (children[currentTask].state == TaskState.FINISHED) {
             currentTask++
-            if (currentTask >= childTasks.size) {
+            if (currentTask >= children.size) {
                 state = TaskState.FINISHED
                 return
             }
-            childTasks[currentTask].start(this.context)
+            children[currentTask].start(this.context)
         }
     }
 
     override fun run() {
-        if (childTasks.isEmpty()) {
+        if (children.isEmpty()) {
             state = TaskState.FINISHED
             return
         }
-        childTasks[0].start(this.context)
+        children[0].start(this.context)
     }
 }

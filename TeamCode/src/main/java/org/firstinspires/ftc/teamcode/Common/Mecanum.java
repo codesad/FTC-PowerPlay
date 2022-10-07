@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 public class Mecanum {
-	private DcMotor fl, fr, bl, br;
+	public DcMotor fl, fr, bl, br;
 
 	public Mecanum(HardwareMap hardwareMap)
 	{

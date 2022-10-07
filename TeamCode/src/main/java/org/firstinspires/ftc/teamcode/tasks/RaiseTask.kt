@@ -11,8 +11,4 @@ class RaiseTask(speed: Float, level: Level) : Task() {
     override fun run() {
         
     }
-
-    override fun tick() {
-
-    }
 }
