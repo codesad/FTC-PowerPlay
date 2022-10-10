@@ -3,7 +3,7 @@ package com.info1robotics.bobot.tasks
 import com.info1robotics.bobot.Common.GamepadEx
 import com.info1robotics.bobot.opmodes.TeleOpMode
 
-class DigitalTask(val button: GamepadEx.Digital) : Task() {
+class DigitalTask(private val button: GamepadEx.Digital) : Task() {
     enum class Type {
         PRESS,
         RELEASE,
@@ -26,7 +26,6 @@ class DigitalTask(val button: GamepadEx.Digital) : Task() {
                 }
                 Type.RELEASE -> {
                     if (teleOpMode.gamepadEx.getButtonUp(button)) {
-                        println("fdshfdsjhk")
                         action.start(context)
                     }
                 }

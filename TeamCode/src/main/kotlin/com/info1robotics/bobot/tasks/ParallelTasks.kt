@@ -22,12 +22,4 @@ class ParallelTasks : Task() {
             task.start(this.context)
         }
     }
-
-    companion object {
-        fun parallel(init: ParallelTasks.() -> Unit): ParallelTasks {
-            val tasks = ParallelTasks()
-            tasks.init()
-            return tasks
-        }
-    }
 }

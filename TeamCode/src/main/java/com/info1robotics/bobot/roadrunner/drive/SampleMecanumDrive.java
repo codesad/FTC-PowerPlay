@@ -91,7 +91,7 @@ public class SampleMecanumDrive extends MecanumDrive {
         //             |
         //      _______|_____________     +Y axis
         //     /       |_____________/|__________
-        //    /   REV / EXPANSION   //
+        //   /   REV / EXPANSION   //
         //   /       / HUB         //
         //  /_______/_____________//
         // |_______/_____________|/

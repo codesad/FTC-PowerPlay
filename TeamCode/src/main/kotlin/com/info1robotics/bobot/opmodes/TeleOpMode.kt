@@ -1,15 +1,11 @@
 package com.info1robotics.bobot.opmodes
 
-import com.qualcomm.robotcore.hardware.DcMotor
-import com.qualcomm.robotcore.hardware.Servo
 import com.info1robotics.bobot.Common.GamepadEx
 import com.info1robotics.bobot.Common.Mecanum
 import com.info1robotics.bobot.tasks.AllTasks
-import com.info1robotics.bobot.tasks.LoopTasks
-import kotlin.math.*
 
 abstract class TeleOpMode: ImplOpMode() {
-    abstract val loopTask: AllTasks
+    abstract val task: AllTasks
     open var useOmniMecanum = false
     lateinit var gamepadEx: GamepadEx
 //    lateinit var slider: DcMotor
@@ -21,25 +17,21 @@ abstract class TeleOpMode: ImplOpMode() {
 //        claw = hardwareMap.servo.get("claw")
         gamepadEx = GamepadEx(gamepad1)
         onInit()
-        waitForStart()
-        loopTask.start(this)
+        while (!isStarted) {
+            onInitLoop()
+        }
+        task.start(this)
         while (opModeIsActive()) {
-            loopTask.tick()
+            task.tick()
             gamepadEx.update()
             onLoop()
             if (useOmniMecanum) {
-                val r = hypot(gamepad1.left_stick_x.toDouble(), gamepad1.left_stick_y.toDouble())
-                val robotAngle = atan2(gamepad1.left_stick_y.toDouble(), gamepad1.left_stick_x.toDouble()) - PI / 4
-                val rightX = gamepad1.right_stick_x.toDouble()
-                val v1 = r * cos(robotAngle) + rightX
-                val v2 = r * sin(robotAngle) - rightX
-                val v3 = r * sin(robotAngle) + rightX
-                val v4 = r * cos(robotAngle) - rightX
-
-                mecanum.fl.power = v1
-                mecanum.fr.power = v2
-                mecanum.bl.power = v3
-                mecanum.br.power = v4
+                mecanum.vectorMove(
+                    gamepad1.left_stick_x.toDouble(),
+                    -gamepad1.left_stick_y.toDouble(),
+                    gamepad1.left_trigger - gamepad1.right_trigger.toDouble(),
+                    if (gamepad1.left_bumper) .5 else 1.0
+                )
             }
             telemetry.update()
         }
