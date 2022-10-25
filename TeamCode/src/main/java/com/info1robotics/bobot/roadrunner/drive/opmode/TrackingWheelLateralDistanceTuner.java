@@ -64,7 +64,7 @@ import com.info1robotics.bobot.roadrunner.drive.StandardTrackingWheelLocalizer;
  */
 @Config
 @TeleOp(group = "org/firstinspires/ftc/teamcode/roadrunner/drive")
-@Disabled //rr
+//@Disabled //rr
 public class TrackingWheelLateralDistanceTuner extends LinearOpMode {
     public static int NUM_TURNS = 10;
 

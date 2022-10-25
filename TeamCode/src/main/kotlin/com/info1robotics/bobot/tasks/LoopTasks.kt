@@ -1,5 +1,9 @@
 package com.info1robotics.bobot.tasks
 
+/**
+ * Synchronously starts and ticks each child.
+ * Restarts each child when it finishes.
+ */
 class LoopTasks : Task() {
     var currentTask = 0
 

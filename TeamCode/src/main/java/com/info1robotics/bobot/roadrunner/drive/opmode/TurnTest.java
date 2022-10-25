@@ -12,7 +12,7 @@ import com.info1robotics.bobot.roadrunner.drive.SampleMecanumDrive;
  */
 @Config
 @Autonomous(group = "org/firstinspires/ftc/teamcode/roadrunner/drive")
-@Disabled //rr
+//@Disabled //rr
 public class TurnTest extends LinearOpMode {
     public static double ANGLE = 90; // deg
 

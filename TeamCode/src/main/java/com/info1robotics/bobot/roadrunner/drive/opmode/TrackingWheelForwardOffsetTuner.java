@@ -36,7 +36,7 @@ import com.info1robotics.bobot.roadrunner.drive.StandardTrackingWheelLocalizer;
  */
 @Config
 @Autonomous(group= "org/firstinspires/ftc/teamcode/roadrunner/drive")
-@Disabled //rr
+//@Disabled //rr
 public class TrackingWheelForwardOffsetTuner extends LinearOpMode {
     public static double ANGLE = 180; // deg
     public static int NUM_TRIALS = 5;

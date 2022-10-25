@@ -16,7 +16,7 @@ import com.info1robotics.bobot.roadrunner.drive.SampleMecanumDrive;
  */
 @Config
 @Autonomous(group = "org/firstinspires/ftc/teamcode/roadrunner/drive")
-@Disabled //rr
+//@Disabled //rr
 public class StrafeTest extends LinearOpMode {
     public static double DISTANCE = 60; // in
 

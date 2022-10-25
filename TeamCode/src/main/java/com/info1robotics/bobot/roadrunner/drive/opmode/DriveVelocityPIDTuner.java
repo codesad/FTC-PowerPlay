@@ -50,7 +50,7 @@ import static com.info1robotics.bobot.roadrunner.drive.DriveConstants.kV;
  */
 @Config
 @Autonomous(group = "org/firstinspires/ftc/teamcode/roadrunner/drive")
-@Disabled //rr
+//@Disabled //rr
 public class DriveVelocityPIDTuner extends LinearOpMode {
     public static double DISTANCE = 72; // in
 

@@ -24,7 +24,7 @@ import com.info1robotics.bobot.roadrunner.trajectorysequence.TrajectorySequence;
  */
 @Config
 @Autonomous(group = "org/firstinspires/ftc/teamcode/roadrunner/drive")
-@Disabled //rr
+//@Disabled //rr
 public class FollowerPIDTuner extends LinearOpMode {
     public static double DISTANCE = 48; // in
 

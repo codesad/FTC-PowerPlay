@@ -3,6 +3,10 @@ package com.info1robotics.bobot.tasks
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.info1robotics.bobot.tasks.Task
 
+/**
+ * Synchronously starts and ticks each child.
+ * Ends when all children finish.
+ */
 open class SyncTasks() : Task() {
     var currentTask = 0
 

@@ -1,5 +1,9 @@
 package com.info1robotics.bobot.tasks
 
+/**
+ * Starts each child in parallel.
+ * Ends when all children finish.
+ */
 class ParallelTasks : Task() {
     var finishedTasks = 0
 

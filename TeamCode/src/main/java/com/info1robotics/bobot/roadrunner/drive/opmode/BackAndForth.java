@@ -27,10 +27,10 @@ import com.info1robotics.bobot.roadrunner.drive.SampleMecanumDrive;
  */
 @Config
 @Autonomous(group = "org/firstinspires/ftc/teamcode/roadrunner/drive")
-@Disabled //rr
+//@Disabled //rr
 public class BackAndForth extends LinearOpMode {
 
-    public static double DISTANCE = 50;
+    public static double DISTANCE = 40;
 
     @Override
     public void runOpMode() throws InterruptedException {

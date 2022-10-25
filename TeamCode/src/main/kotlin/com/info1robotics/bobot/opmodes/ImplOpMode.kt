@@ -2,9 +2,21 @@ package com.info1robotics.bobot.opmodes
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.info1robotics.bobot.Common.Mecanum
+import com.info1robotics.bobot.roadrunner.drive.SampleMecanumDrive
+import com.qualcomm.robotcore.hardware.DcMotor
+import com.qualcomm.robotcore.hardware.Servo
 
+/**
+ * Base class for OpModes. An extension of [LinearOpMode].
+ * @property mecanum Instance of the [Mecanum] helper class. Utilised for movement.
+ * @property slider Instance of the [DcMotor] class. Utilised for the raising and lowering of the slider.
+ * @property claw Instance of the [Servo] class. Utilised for moving the claw.
+ */
 open class ImplOpMode : LinearOpMode() {
     lateinit var mecanum: Mecanum
+    lateinit var slider: DcMotor
+    lateinit var claw: Servo
+    lateinit var rr: SampleMecanumDrive
     open fun onInit() {}
     open fun onInitLoop() {}
     open fun onStart() {}
@@ -13,6 +25,7 @@ open class ImplOpMode : LinearOpMode() {
     @Throws(InterruptedException::class)
     override fun runOpMode() {
         mecanum = Mecanum(this.hardwareMap)
+        rr = SampleMecanumDrive(this.hardwareMap)
         onInit()
         while (!isStarted) {
             onInitLoop()

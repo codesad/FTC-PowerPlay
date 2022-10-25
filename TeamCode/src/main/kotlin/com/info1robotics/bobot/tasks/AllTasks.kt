@@ -1,11 +1,24 @@
 package com.info1robotics.bobot.tasks
 
-class AllTasks : Task() {
+/**
+ * Asynchronously starts and ticks each child.
+ * Ends when all children finish.
+ */
+open class AllTasks() : Task() {
+
     override fun tick() {
-        children.forEach { it.tick() }
+        if(children.all { it.isFinished() }) {
+            state = State.FINISHED
+        } else {
+            children.forEach {
+                if(it.isRunning()) {
+                    it.tick()
+                }
+            }
+        }
     }
 
     override fun run() {
-        children.forEach { it.start(this.context) }
+        children.forEach { it.start(context) }
     }
 }

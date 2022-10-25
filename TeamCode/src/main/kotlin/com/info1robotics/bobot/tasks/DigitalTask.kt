@@ -3,6 +3,12 @@ package com.info1robotics.bobot.tasks
 import com.info1robotics.bobot.Common.GamepadEx
 import com.info1robotics.bobot.opmodes.TeleOpMode
 
+/**
+ * Listener for digital buttons.
+ * Never ends, intended to be used with [AllTasks].
+ * See [TaskBuilder.digital].
+ * @param button The digital button to listen for.
+ */
 class DigitalTask(private val button: GamepadEx.Digital) : Task() {
     enum class Type {
         PRESS,
@@ -38,9 +44,14 @@ class DigitalTask(private val button: GamepadEx.Digital) : Task() {
         }
     }
 
-    fun on(type: Type, block: SyncTasks.() -> Unit): SyncTasks {
+    /**
+     * Registers tasks to be synchronously executed when the button is executed with the given type.
+     * @param type The action type. See [Type].
+     * @param init Lambda to initialise the action. See [SyncTasks].
+     */
+    fun on(type: Type, init: SyncTasks.() -> Unit): SyncTasks {
         val task = SyncTasks()
-        task.block()
+        task.init()
         tasks[type] = task
         return task
     }
