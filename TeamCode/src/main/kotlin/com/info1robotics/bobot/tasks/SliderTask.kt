@@ -16,14 +16,16 @@ class SliderTask(private val level: Level) : Task() {
     }
 
     override fun tick() {
-        if (context.slider.currentPosition == level.tick) {
-            context.slider.power = 0.0
+        if (context.sliderLeft.currentPosition == level.tick ||
+            context.sliderRight.currentPosition == level.tick) {
+            context.sliderLeft.power = 0.0
+            context.sliderRight.power = 0.0
             state = State.FINISHED
         }
     }
 
     override fun run() {
-        context.slider.targetPosition = level.tick
-        context.slider.power = 0.3
+        context.sliderLeft.targetPosition = level.tick
+        context.sliderRight.targetPosition = level.tick
     }
 }

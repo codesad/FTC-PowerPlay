@@ -1,26 +1,109 @@
 package com.info1robotics.bobot.opmodes
 
-import com.acmerobotics.roadrunner.geometry.Pose2d
 import com.info1robotics.bobot.Common.GamepadEx.Digital.*
-import com.info1robotics.bobot.roadrunner.drive.SampleMecanumDrive
-import com.info1robotics.bobot.tasks.DigitalTask.Type.*
+import com.info1robotics.bobot.tasks.DigitalTask.Type.PRESS
+import com.info1robotics.bobot.tasks.DigitalTask.Type.RELEASE
 import com.info1robotics.bobot.tasks.TaskBuilder.all
 import com.info1robotics.bobot.tasks.TaskBuilder.digital
-import com.info1robotics.bobot.tasks.TaskBuilder.wait
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
-import com.qualcomm.robotcore.hardware.DcMotor
-import com.qualcomm.robotcore.hardware.DcMotorSimple
 
-@TeleOp(name = "dpad slider aaaa")
+@TeleOp(name = "Movement")
 class TesteTeleOp : TeleOpMode() {
     override var useOmniMecanum = true
-    lateinit var fr: DcMotor
-
-    override fun onInit() {
-
-    }
 
     override val task = all {
+        + digital(DPAD_UP) {
+            on(PRESS) {
+                + {
+                    sliderLeft.power = .5
+                    sliderRight.power = .5
+                }
+            }
+            on(RELEASE) {
+                + {
+                    sliderLeft.power = .0
+                    sliderRight.power = .0
+                }
+            }
+        }
 
+        + digital(DPAD_DOWN) {
+            on(PRESS) {
+                + {
+                    sliderLeft.power = -.5
+                    sliderRight.power = -.5
+                }
+            }
+            on(RELEASE) {
+                + {
+                    sliderLeft.power = .0
+                    sliderRight.power = .0
+                }
+            }
+        }
+
+        +digital(X) {
+            on(PRESS) {
+                + {
+                    sliderLeft.power = .3
+                }
+            }
+            on(RELEASE) {
+                + {
+                    sliderLeft.power = .0
+                }
+            }
+        }
+//        +digital(B) {
+//            on(PRESS) {
+//                + {
+//                    sliderLeft.power = -.3
+//                }
+//            }
+//            on(RELEASE) {
+//                + {
+//                    sliderLeft.power = .0
+//                }
+//            }
+//        }
+//        +digital(Y) {
+//            on(PRESS) {
+//                + {
+//                    sliderRight.power = .3
+//                }
+//            }
+//            on(RELEASE) {
+//                + {
+//                    sliderRight.power = .0
+//                }
+//            }
+//        }
+//        +digital(A) {
+//            on(PRESS) {
+//                + {
+//                    sliderRight.power = -.3
+//                }
+//            }
+//            on(RELEASE) {
+//                + {
+//                    sliderRight.power = .0
+//                }
+//            }
+//        }
+        +digital(Y) {
+            on(PRESS) {
+                + {
+                    claw.position = 0.7
+                }
+            }
+        }
+
+        +digital(A) {
+            on(PRESS) {
+                +{
+                    claw.position = 0.0
+                }
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@ class Mecanum(hardwareMap: HardwareMap) {
         br.direction = DcMotorSimple.Direction.FORWARD
         bl.direction = DcMotorSimple.Direction.FORWARD
         fl.direction = DcMotorSimple.Direction.FORWARD
-        fr.direction = DcMotorSimple.Direction.REVERSE
+        fr.direction = DcMotorSimple.Direction.FORWARD
         fl.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         fr.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         bl.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE

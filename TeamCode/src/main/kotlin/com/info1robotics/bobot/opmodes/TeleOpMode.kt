@@ -6,6 +6,7 @@ import com.info1robotics.bobot.roadrunner.drive.SampleMecanumDrive
 import com.info1robotics.bobot.tasks.*
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.hardware.DcMotor
+import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Servo
 
 /**
@@ -22,9 +23,15 @@ abstract class TeleOpMode: ImplOpMode() {
     @Throws(InterruptedException::class)
     override fun runOpMode() {
         mecanum = Mecanum(this.hardwareMap)
-        rr = SampleMecanumDrive(this.hardwareMap)
-//        slider = hardwareMap.dcMotor.get("motorSlider")
-//        claw = hardwareMap.servo.get("claw")
+//        rr = SampleMecanumDrive(this.hardwareMap)
+        sliderLeft = hardwareMap.dcMotor.get("sliderLeft")
+        sliderRight = hardwareMap.dcMotor.get("sliderRight")
+        sliderLeft.direction = DcMotorSimple.Direction.REVERSE
+        sliderRight.direction = DcMotorSimple.Direction.REVERSE
+        sliderLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
+        sliderRight.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
+        claw = hardwareMap.servo.get("claw")
+        claw.position = 0.0
         gamepadEx = GamepadEx(gamepad1)
         onInit()
         while (!isStarted) {
@@ -40,7 +47,7 @@ abstract class TeleOpMode: ImplOpMode() {
                     gamepad1.left_stick_x.toDouble(),
                     -gamepad1.left_stick_y.toDouble(),
                     -(gamepad1.left_trigger - gamepad1.right_trigger.toDouble()),
-                    if (gamepad1.left_bumper) .5 else 1.0
+                    .5
                 )
             }
             telemetry.update()

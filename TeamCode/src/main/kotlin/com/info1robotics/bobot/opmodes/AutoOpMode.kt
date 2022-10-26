@@ -13,10 +13,13 @@ abstract class AutoOpMode: ImplOpMode() {
     @Throws(InterruptedException::class)
     override fun runOpMode() {
         mecanum = Mecanum(this.hardwareMap)
-        slider = hardwareMap.dcMotor.get("motorSlider")
+        sliderLeft = hardwareMap.dcMotor.get("sliderRight")
+        sliderRight = hardwareMap.dcMotor.get("sliderRight")
         claw = hardwareMap.servo.get("claw")
-        slider.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
-        slider.mode = DcMotor.RunMode.RUN_TO_POSITION
+        sliderLeft.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
+        sliderLeft.mode = DcMotor.RunMode.RUN_TO_POSITION
+        sliderRight.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
+        sliderRight.mode = DcMotor.RunMode.RUN_TO_POSITION
         claw.position = 0.0
         onInit()
         while (!isStarted) {

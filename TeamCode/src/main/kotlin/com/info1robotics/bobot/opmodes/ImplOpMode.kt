@@ -14,7 +14,8 @@ import com.qualcomm.robotcore.hardware.Servo
  */
 open class ImplOpMode : LinearOpMode() {
     lateinit var mecanum: Mecanum
-    lateinit var slider: DcMotor
+    lateinit var sliderLeft: DcMotor
+    lateinit var sliderRight: DcMotor
     lateinit var claw: Servo
     lateinit var rr: SampleMecanumDrive
     open fun onInit() {}
@@ -26,6 +27,7 @@ open class ImplOpMode : LinearOpMode() {
     override fun runOpMode() {
         mecanum = Mecanum(this.hardwareMap)
         rr = SampleMecanumDrive(this.hardwareMap)
+        claw = hardwareMap.servo.get("claw")
         onInit()
         while (!isStarted) {
             onInitLoop()
