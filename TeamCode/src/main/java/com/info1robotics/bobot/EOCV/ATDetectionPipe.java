@@ -37,7 +37,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 
 import java.util.ArrayList;
 
-class AprilTagDetectionPipeline extends OpenCvPipeline
+public class ATDetectionPipe extends OpenCvPipeline
 {
     private long nativeApriltagPtr;
     private Mat grey = new Mat();
@@ -67,7 +67,7 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
     private boolean needToSetDecimation;
     private final Object decimationSync = new Object();
 
-    public AprilTagDetectionPipeline(double tagsize, double fx, double fy, double cx, double cy)
+    public ATDetectionPipe(double tagsize, double fx, double fy, double cx, double cy)
     {
         this.tagsize = tagsize;
         this.tagsizeX = tagsize;
@@ -102,6 +102,7 @@ class AprilTagDetectionPipeline extends OpenCvPipeline
     @Override
     public Mat processFrame(Mat input)
     {
+        System.out.println("frame process");
         // Convert to greyscale
         Imgproc.cvtColor(input, grey, Imgproc.COLOR_RGBA2GRAY);
 

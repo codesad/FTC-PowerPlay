@@ -10,7 +10,7 @@ import com.info1robotics.bobot.tasks.DigitalTask.Type
  * See [TaskBuilder.analog].
  * @param button The analog input to listen for.
  */
-class AnalogTask(private val button: GamepadEx.Analog) : Task() {
+class AnalogTask(private val button: GamepadEx.Analog, private val gamepad: Int) : Task() {
     enum class Type {
         HOLD
     }
@@ -20,12 +20,13 @@ class AnalogTask(private val button: GamepadEx.Analog) : Task() {
         if (context !is TeleOpMode) {
             throw Exception("AnalogTask can only be used in TeleOp")
         }
+        val teleOpMode = context as TeleOpMode
+        val gamepadEx = if (gamepad == 1) teleOpMode.gamepadEx else teleOpMode.gamepadEx2
         tasks.forEach { (type, action) ->
             if (action.isRunning()) action.tick()
-            val teleOpMode = context as TeleOpMode
             when (type) {
                 Type.HOLD -> {
-                    if (teleOpMode.gamepadEx.getAnalog(button) > 0.08) {
+                    if (gamepadEx.getAnalog(button) > 0.08) {
                         action.start(context)
                     }
                 }
