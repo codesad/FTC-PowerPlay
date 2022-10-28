@@ -9,7 +9,7 @@ import com.info1robotics.bobot.opmodes.TeleOpMode
  * See [TaskBuilder.digital].
  * @param button The digital button to listen for.
  */
-class DigitalTask(private val button: GamepadEx.Digital) : Task() {
+class DigitalTask(private val button: GamepadEx.Digital, private val gamepad: Int) : Task() {
     enum class Type {
         PRESS,
         RELEASE,
@@ -18,25 +18,30 @@ class DigitalTask(private val button: GamepadEx.Digital) : Task() {
     var tasks = mutableMapOf<Type, SyncTasks>()
 
     override fun tick() {
+        println("ticking")
         if (context !is TeleOpMode) {
             throw Exception("DigitalTask can only be used in TeleOp")
         }
+        val teleOpMode = (context) as TeleOpMode
         tasks.forEach { (type, action) ->
             if (action.isRunning()) action.tick()
-            val teleOpMode = context as TeleOpMode
+            val gamepadEx = if (gamepad == 1) teleOpMode.gamepadEx else teleOpMode.gamepadEx2
+//            println(gamepadEx)
             when (type) {
                 Type.PRESS -> {
-                    if (teleOpMode.gamepadEx.getButtonDown(button)) {
+                    println(gamepadEx)
+                    println(button)
+                    if (gamepadEx.getButtonDown(button)) {
                         action.start(context)
                     }
                 }
                 Type.RELEASE -> {
-                    if (teleOpMode.gamepadEx.getButtonUp(button)) {
+                    if (gamepadEx.getButtonUp(button)) {
                         action.start(context)
                     }
                 }
                 Type.HOLD -> {
-                    if (teleOpMode.gamepadEx.getButton(button)) {
+                    if (gamepadEx.getButton(button)) {
                         action.start(context)
                     }
                 }
