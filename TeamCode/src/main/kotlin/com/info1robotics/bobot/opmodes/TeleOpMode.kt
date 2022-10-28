@@ -31,7 +31,9 @@ abstract class TeleOpMode: ImplOpMode() {
         sliderLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         sliderRight.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         claw = hardwareMap.servo.get("claw")
-        claw.position = 0.0
+        sliderRight.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER
+        sliderRight.mode=DcMotor.RunMode.RUN_USING_ENCODER
+        claw.position = 0.8
         gamepadEx = GamepadEx(gamepad1)
         onInit()
         while (!isStarted) {
@@ -47,10 +49,9 @@ abstract class TeleOpMode: ImplOpMode() {
                     gamepad1.left_stick_x.toDouble(),
                     -gamepad1.left_stick_y.toDouble(),
                     -(gamepad1.left_trigger - gamepad1.right_trigger.toDouble()),
-                    .5
+                    .4
                 )
             }
-            telemetry.update()
         }
         onEnd()
     }

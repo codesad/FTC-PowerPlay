@@ -18,7 +18,11 @@ open class ImplOpMode : LinearOpMode() {
     lateinit var sliderRight: DcMotor
     lateinit var claw: Servo
     lateinit var rr: SampleMecanumDrive
-    open fun onInit() {}
+    var clawOpen=true;
+    open fun onInit() {
+        sliderRight.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER
+
+    }
     open fun onInitLoop() {}
     open fun onStart() {}
     open fun onLoop() {}
