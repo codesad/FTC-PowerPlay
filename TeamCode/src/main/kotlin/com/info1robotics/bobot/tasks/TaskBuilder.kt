@@ -19,6 +19,12 @@ object TaskBuilder {
         return task
     }
 
+    fun async(block: ParallelTasks.() -> Unit): ParallelTasks {
+        val task = ParallelTasks()
+        task.block()
+        return task
+    }
+
     fun all(block: AllTasks.() -> Unit): AllTasks {
         val task = AllTasks()
         task.block()

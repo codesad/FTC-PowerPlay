@@ -5,6 +5,7 @@ import com.info1robotics.bobot.tasks.ClawTask
 import com.info1robotics.bobot.tasks.DigitalTask.Type.*
 import com.info1robotics.bobot.tasks.SliderTask
 import com.info1robotics.bobot.tasks.TaskBuilder
+import com.info1robotics.bobot.tasks.TaskBuilder.async
 import com.info1robotics.bobot.tasks.TaskBuilder.digital
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 
@@ -26,15 +27,26 @@ class SliderClawTest :TeleOpMode(){
                 +ClawTask()
             }
         }
+        +digital(Y) {
+            on(PRESS) {
+                +{
+                    telemetry.addData("clawopen", clawOpen)
+                    telemetry.update()
+                }
+            }
+        }
         +digital(DPAD_DOWN,2)
         {
-            on(PRESS)
-            {
-            +{+SliderTask(SliderTask.Level.LOW)
-                if(clawOpen)
-                {    claw.position=.8;
-                clawOpen=false;}
-            }
+            on(PRESS) {
+                +async {
+                    +SliderTask(SliderTask.Level.LOW)
+                    +{
+                        if(clawOpen) {
+                            claw.position=ClawTask.closedPosition
+                            clawOpen=false
+                        }
+                    }
+                }
             }
 
         }
@@ -42,16 +54,21 @@ class SliderClawTest :TeleOpMode(){
         {
             on(PRESS)
             {
-                +SliderTask(SliderTask.Level.GROUND)
-                +{
-                    if(clawOpen)
-                    {    claw.position=.8;
-                        clawOpen=false;}
+                +async {
+                    +SliderTask(SliderTask.Level.GROUND)
+                    +{
+                        println("dfjdshfjsk ${clawOpen}")
+                        if(clawOpen) {
+                            claw.position = ClawTask.closedPosition
+                            clawOpen = false
+                        }
+                    }
                 }
                 +{
-                    if(!clawOpen)
-                    {    claw.position=.6;
-                        clawOpen=true;}
+                    if(!clawOpen) {
+                        claw.position=ClawTask.openPosition
+                        clawOpen=true
+                    }
                 }
             }
 
@@ -62,7 +79,7 @@ class SliderClawTest :TeleOpMode(){
             {
                 +{+SliderTask(SliderTask.Level.HIGH)
                     if(clawOpen)
-                    {    claw.position=.8;
+                    {    claw.position=ClawTask.closedPosition;
                         clawOpen=false;}
                 }
             }
@@ -75,7 +92,7 @@ class SliderClawTest :TeleOpMode(){
                 +{+SliderTask(SliderTask.Level.MEDIUM)
                     if(clawOpen)
                     {
-                        claw.position=.8;
+                        claw.position=ClawTask.closedPosition;
                         clawOpen=false;
                     }
                 }

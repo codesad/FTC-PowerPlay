@@ -28,9 +28,10 @@ abstract class TeleOpMode: ImplOpMode() {
 //        rr = SampleMecanumDrive(this.hardwareMap)
         claw = hardwareMap.servo.get("claw")
         sliderRight = hardwareMap.dcMotor.get("sliderRight")
+        sliderRight.zeroPowerBehavior=DcMotor.ZeroPowerBehavior.BRAKE
         sliderRight.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER
         sliderRight.mode=DcMotor.RunMode.RUN_USING_ENCODER
-        claw.position = 0.8
+        claw.position = ClawTask.openPosition
         gamepadEx = GamepadEx(gamepad1)
         gamepadEx2 = GamepadEx(gamepad2)
         onInit()
