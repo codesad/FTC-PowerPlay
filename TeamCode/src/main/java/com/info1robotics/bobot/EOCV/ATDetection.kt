@@ -44,7 +44,7 @@ open class ATDetection(var opMode: LinearOpMode) {
         opMode.telemetry.msTransmissionInterval = 50
     }
 
-    fun detectZone(): String {
+    fun detectZone(): Int {
         val currentDetections = aprilTagDetectionPipeline.latestDetections
         println("the length is ${aprilTagDetectionPipeline.latestDetections}")
         if (currentDetections.isNotEmpty()) {
@@ -60,12 +60,6 @@ open class ATDetection(var opMode: LinearOpMode) {
 
         SystemClock.sleep(100)
 
-        parkZone = when(zone) {
-            1 -> "LEFT"
-            2 -> "MIDDLE"
-            3 -> "RIGHT"
-            else -> "UNKNOWN"
-        }
-        return parkZone
+        return zone
     }
 }

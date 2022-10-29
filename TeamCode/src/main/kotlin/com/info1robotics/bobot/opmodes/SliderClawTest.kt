@@ -11,7 +11,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 @TeleOp
 class SliderClawTest :TeleOpMode(){
     override var useOmniMecanum = true
-
     override val task = TaskBuilder.all {
         +{
            telemetry.addLine(if (clawOpen) "open" else "closed")
@@ -20,14 +19,14 @@ class SliderClawTest :TeleOpMode(){
 
 
 
-        +digital(A)
+        +digital(A,2)
         {
             on(PRESS)
             {
                 +ClawTask()
             }
         }
-        +digital(DPAD_DOWN)
+        +digital(DPAD_DOWN,2)
         {
             on(PRESS)
             {
@@ -39,7 +38,7 @@ class SliderClawTest :TeleOpMode(){
             }
 
         }
-        +digital(X)
+        +digital(X,2)
         {
             on(PRESS)
             {
@@ -57,7 +56,7 @@ class SliderClawTest :TeleOpMode(){
             }
 
         }
-        +digital(DPAD_UP)
+        +digital(DPAD_UP,2)
         {
             on(PRESS)
             {
@@ -69,7 +68,7 @@ class SliderClawTest :TeleOpMode(){
             }
 
         }
-        +digital(DPAD_LEFT)
+        +digital(DPAD_LEFT,2)
         {
             on(PRESS)
             {
@@ -81,6 +80,17 @@ class SliderClawTest :TeleOpMode(){
                     }
                 }
             }
+        }
+        +digital(BUMPER_RIGHT,2)
+        {
+            + {
+                sliderRight.power=-1.0
+            }
+
+        }
+        +digital(BUMPER_LEFT,2)
+        {
+          +{sliderRight.power=-1.0}
         }
     }
 

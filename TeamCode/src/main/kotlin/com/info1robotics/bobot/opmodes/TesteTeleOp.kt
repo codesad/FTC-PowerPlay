@@ -13,7 +13,7 @@ class TesteTeleOp : TeleOpMode() {
     override var useOmniMecanum = false
 
     override val task = all {
-       +digital(DPAD_UP)
+       +digital(DPAD_UP,2)
        {
            on(PRESS)
            {

@@ -19,22 +19,20 @@ import com.qualcomm.robotcore.hardware.Servo
 abstract class TeleOpMode: ImplOpMode() {
     abstract val task: AllTasks
     open var useOmniMecanum = false
+    var power = .5
     lateinit var gamepadEx: GamepadEx
+    lateinit var gamepadEx2: GamepadEx
     @Throws(InterruptedException::class)
     override fun runOpMode() {
         mecanum = Mecanum(this.hardwareMap)
 //        rr = SampleMecanumDrive(this.hardwareMap)
-        sliderLeft = hardwareMap.dcMotor.get("sliderLeft")
-        sliderRight = hardwareMap.dcMotor.get("sliderRight")
-        sliderLeft.direction = DcMotorSimple.Direction.REVERSE
-        sliderRight.direction = DcMotorSimple.Direction.REVERSE
-        sliderLeft.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
-        sliderRight.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         claw = hardwareMap.servo.get("claw")
+        sliderRight = hardwareMap.dcMotor.get("sliderRight")
         sliderRight.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER
         sliderRight.mode=DcMotor.RunMode.RUN_USING_ENCODER
         claw.position = 0.8
         gamepadEx = GamepadEx(gamepad1)
+        gamepadEx2 = GamepadEx(gamepad2)
         onInit()
         while (!isStarted) {
             onInitLoop()
@@ -43,6 +41,7 @@ abstract class TeleOpMode: ImplOpMode() {
         while (opModeIsActive()) {
             task.tick()
             gamepadEx.update()
+            gamepadEx2.update()
             onLoop()
             if (useOmniMecanum) {
                 mecanum.vectorMove(

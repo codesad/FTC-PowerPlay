@@ -25,7 +25,7 @@ object TaskBuilder {
         return task
     }
 
-    fun digital(button: GamepadEx.Digital, gamepad: Int, block: DigitalTask.() -> Unit): DigitalTask {
+    fun digital(button: GamepadEx.Digital, gamepad: Int = 1, block: DigitalTask.() -> Unit): DigitalTask {
         val task = DigitalTask(button, gamepad)
         task.block()
         return task
@@ -39,7 +39,7 @@ object TaskBuilder {
         return SleepWhile(condition)
     }
 
-    fun analog(button: GamepadEx.Analog, gamepad: Int, block: AnalogTask.() -> Unit): AnalogTask {
+    fun analog(button: GamepadEx.Analog, gamepad: Int = 1, block: AnalogTask.() -> Unit): AnalogTask {
         val task = AnalogTask(button, gamepad)
         task.block()
         return task
