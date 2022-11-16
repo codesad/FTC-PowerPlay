@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.DcMotor
 abstract class AutoOpMode: ImplOpMode() {
     abstract val task: Task
     lateinit var atDetection: ATDetection
-     var parkzone=1
+    var parkzone = 1
 
     @Throws(InterruptedException::class)
     override fun onInitLoop() {
@@ -32,6 +32,7 @@ abstract class AutoOpMode: ImplOpMode() {
         }
         task.start(this)
         while (opModeIsActive() && !task.isFinished()) {
+            atDetection.detectZone()
             task.tick()
             onLoop()
             telemetry.update()

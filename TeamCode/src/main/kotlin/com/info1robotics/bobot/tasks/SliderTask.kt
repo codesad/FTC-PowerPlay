@@ -11,9 +11,9 @@ import kotlin.math.abs
 class SliderTask(private val level: Level) : Task() {
     enum class Level(val tick: Int) {
         GROUND(0),
-        LOW(1000),
-        MEDIUM(1850),
-        HIGH(2520),
+        LOW(1250),
+        MEDIUM(2000),
+        HIGH(2760),
     }
 
     override fun tick() {

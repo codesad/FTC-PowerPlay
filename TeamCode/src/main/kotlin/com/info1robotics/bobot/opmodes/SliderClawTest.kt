@@ -8,6 +8,7 @@ import com.info1robotics.bobot.tasks.TaskBuilder
 import com.info1robotics.bobot.tasks.TaskBuilder.async
 import com.info1robotics.bobot.tasks.TaskBuilder.digital
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import com.qualcomm.robotcore.hardware.DcMotor
 
 @TeleOp
 class SliderClawTest : TeleOpMode() {
@@ -92,17 +93,33 @@ class SliderClawTest : TeleOpMode() {
             }
         }
         +digital(BUMPER_RIGHT,2) {
-            + {
-                sliderRight.power=.5
-                sliderLeft.power=.5
+            on(PRESS) {
+                + {
+                    sliderRight.power=.5
+                    sliderLeft.power=.5
+                }
+            }
+            on(RELEASE) {
+                + {
+                    sliderRight.power=0.0
+                    sliderLeft.power=0.0
+                }
             }
 
         }
         +digital(BUMPER_LEFT,2) {
-          + {
-              sliderRight.power=-.5
-              sliderLeft.power=-.5
-          }
+            on(PRESS) {
+                + {
+                    sliderRight.power=-.5
+                    sliderLeft.power=-.5
+                }
+            }
+            on(RELEASE) {
+                +{
+                    sliderRight.power=0.0
+                    sliderLeft.power=0.0
+                }
+            }
         }
         }
     }
