@@ -19,7 +19,7 @@ import com.qualcomm.robotcore.hardware.Servo
 abstract class TeleOpMode: ImplOpMode() {
     abstract val task: AllTasks
     open var useOmniMecanum = false
-    var power = .5
+    var power = .73
     lateinit var gamepadEx: GamepadEx
     lateinit var gamepadEx2: GamepadEx
     @Throws(InterruptedException::class)
@@ -31,6 +31,11 @@ abstract class TeleOpMode: ImplOpMode() {
         sliderRight.zeroPowerBehavior=DcMotor.ZeroPowerBehavior.BRAKE
         sliderRight.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER
         sliderRight.mode=DcMotor.RunMode.RUN_USING_ENCODER
+        sliderLeft = hardwareMap.dcMotor.get("sliderLeft")
+        sliderLeft.zeroPowerBehavior=DcMotor.ZeroPowerBehavior.BRAKE
+        sliderLeft.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER
+        sliderLeft.mode=DcMotor.RunMode.RUN_USING_ENCODER
+        sliderRight.direction = DcMotorSimple.Direction.REVERSE
         claw.position = ClawTask.openPosition
         gamepadEx = GamepadEx(gamepad1)
         gamepadEx2 = GamepadEx(gamepad2)
@@ -38,6 +43,7 @@ abstract class TeleOpMode: ImplOpMode() {
         while (!isStarted) {
             onInitLoop()
         }
+
         task.start(this)
         while (opModeIsActive()) {
             task.tick()
@@ -49,7 +55,7 @@ abstract class TeleOpMode: ImplOpMode() {
                     gamepad1.left_stick_x.toDouble(),
                     -gamepad1.left_stick_y.toDouble(),
                     -(gamepad1.left_trigger - gamepad1.right_trigger.toDouble()),
-                    .4
+                    power
                 )
             }
         }

@@ -30,7 +30,7 @@ abstract class Task {
     /**
      * Appends the added task as a child to its parent.
      */
-    operator fun Task.unaryPlus() {
+    open operator fun Task.unaryPlus() {
         this@Task.children.add(this) // not sure if this is the best way to do this
     }
 
