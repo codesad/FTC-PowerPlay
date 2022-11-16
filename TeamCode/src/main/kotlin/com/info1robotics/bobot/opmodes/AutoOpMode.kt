@@ -12,7 +12,12 @@ import com.qualcomm.robotcore.hardware.DcMotor
 abstract class AutoOpMode: ImplOpMode() {
     abstract val task: Task
     lateinit var atDetection: ATDetection
+     var parkzone=1
+
     @Throws(InterruptedException::class)
+    override fun onInitLoop() {
+        parkzone=atDetection.detectZone()
+    }
     override fun runOpMode() {
         mecanum = Mecanum(this.hardwareMap)
         claw = hardwareMap.servo.get("claw")
