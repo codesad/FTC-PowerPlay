@@ -1,6 +1,7 @@
-package com.info1robotics.bobot.EOCV
+package org.firstinspires.ftc.teamcode.EOCV.f36h11
 
 import android.os.SystemClock
+import com.info1robotics.bobot.EOCV.f36h11.AprilTagDetectionPipeline_36h11
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import org.openftc.easyopencv.OpenCvCamera
 import org.openftc.easyopencv.OpenCvCameraFactory
@@ -8,7 +9,8 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName
 import org.openftc.easyopencv.OpenCvCamera.AsyncCameraOpenListener
 import org.openftc.easyopencv.OpenCvCameraRotation
 
-open class ATDetection(var opMode: LinearOpMode) {
+
+open class AprilTagDetection_36h11(var opMode: LinearOpMode) {
     private val fx = 578.272
     private val fy = 578.272
     private val cx = 402.145
@@ -18,21 +20,12 @@ open class ATDetection(var opMode: LinearOpMode) {
     private var tagInView = 0
     private var parkZone = ""
     val camera: OpenCvCamera
-    private val aprilTagDetectionPipeline: ATDetectionPipe
+    private val aprilTagDetectionPipeline: AprilTagDetectionPipeline_36h11
 
     init {
-        val cameraMonitorViewId = opMode.hardwareMap.appContext.resources.getIdentifier(
-            "cameraMonitorViewId",
-            "id",
-            opMode.hardwareMap.appContext.packageName
-        )
-        camera = OpenCvCameraFactory.getInstance().createWebcam(
-            opMode.hardwareMap.get(
-                WebcamName::class.java, "Webcam 1"
-            ), cameraMonitorViewId
-        )
-        aprilTagDetectionPipeline = ATDetectionPipe(tagSize, fx, fy, cx, cy)
-
+        val cameraMonitorViewId = opMode.hardwareMap.appContext.resources.getIdentifier("cameraMonitorViewId", "id", opMode.hardwareMap.appContext.packageName)
+        camera = OpenCvCameraFactory.getInstance().createWebcam(opMode.hardwareMap.get(WebcamName::class.java, "Webcam 1"), cameraMonitorViewId)
+        aprilTagDetectionPipeline = AprilTagDetectionPipeline_36h11(tagSize, fx, fy, cx, cy)
         camera.setPipeline(aprilTagDetectionPipeline)
         camera.openCameraDeviceAsync(object : AsyncCameraOpenListener {
             override fun onOpened() {
@@ -44,9 +37,9 @@ open class ATDetection(var opMode: LinearOpMode) {
         opMode.telemetry.msTransmissionInterval = 50
     }
 
-    fun detectZone(): Int {
+    fun detectZone() {
+
         val currentDetections = aprilTagDetectionPipeline.latestDetections
-        println("the length is ${aprilTagDetectionPipeline.latestDetections}")
         if (currentDetections.isNotEmpty()) {
             currentDetections.forEach {tag ->
                 tagInView = tag.id
@@ -58,8 +51,18 @@ open class ATDetection(var opMode: LinearOpMode) {
             }
         }
 
-        SystemClock.sleep(100)
+        SystemClock.sleep(20)
 
-        return zone
+        when(zone){
+            1 -> parkZone = "LEFT"
+            2 -> parkZone = "MIDDLE"
+            3 -> parkZone = "RIGHT"
+        }
+
+        opMode.telemetry.addData("Ideal Park Location ", parkZone)
+        opMode.telemetry.addData("Location ID Detected in View ", zone)
+        opMode.telemetry.addData("April Tag ID in View ", tagInView)
+
+        opMode.telemetry.update()
     }
 }

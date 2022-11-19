@@ -3,7 +3,7 @@ package com.info1robotics.bobot.tasks
 class ClawTask:Task() {
 
 public  companion object{
-    val openPosition=.4
+    val openPosition=.0
     val closedPosition=1.0
 }
 

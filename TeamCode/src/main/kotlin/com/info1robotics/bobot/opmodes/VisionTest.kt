@@ -10,7 +10,7 @@ class VisionTest : AutoOpMode() {
     override val task: Task = sync {
         +wait(4000)
         + {
-            telemetry.addData("Detected: ", atDetection.detectZone())
+//            telemetry.addData("Detected: ", atDetection.detectZone())
             telemetry.update()
         }
     }

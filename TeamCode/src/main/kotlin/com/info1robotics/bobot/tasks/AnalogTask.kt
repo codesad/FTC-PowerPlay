@@ -15,7 +15,7 @@ class AnalogTask(private val button: GamepadEx.Analog, private val gamepad: Int)
         RELEASE
     }
     var tasks = mutableMapOf<Type, SyncTasks>()
-    var position = 0f
+    var position :Double = 0.0
 
     override fun tick() {
         if (context !is TeleOpMode) {
@@ -32,12 +32,12 @@ class AnalogTask(private val button: GamepadEx.Analog, private val gamepad: Int)
                     }
                 }
                 Type.RELEASE -> {
-                    if (position != gamepadEx.getAnalog(button) && gamepadEx.getAnalog(button) == 0f) {
+                    if (position != gamepadEx.getAnalog(button).toDouble() && gamepadEx.getAnalog(button).toDouble() == 0.0) {
                         action.start(context)
                     }
                 }
             }
-            position = gamepadEx.getAnalog(button)
+            position = gamepadEx.getAnalog(button).toDouble()
         }
     }
 

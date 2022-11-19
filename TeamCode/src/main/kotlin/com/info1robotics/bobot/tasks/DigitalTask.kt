@@ -18,7 +18,7 @@ class DigitalTask(private val button: GamepadEx.Digital, private val gamepad: In
     var tasks = mutableMapOf<Type, SyncTasks>()
 
     override fun tick() {
-        println("ticking")
+//        println("ticking")
         if (context !is TeleOpMode) {
             throw Exception("DigitalTask can only be used in TeleOp")
         }
@@ -29,8 +29,6 @@ class DigitalTask(private val button: GamepadEx.Digital, private val gamepad: In
 //            println(gamepadEx)
             when (type) {
                 Type.PRESS -> {
-                    println(gamepadEx)
-                    println(button)
                     if (gamepadEx.getButtonDown(button)) {
                         action.start(context)
                     }
@@ -42,6 +40,7 @@ class DigitalTask(private val button: GamepadEx.Digital, private val gamepad: In
                 }
                 Type.HOLD -> {
                     if (gamepadEx.getButton(button)) {
+                        println("Holding $button")
                         action.start(context)
                     }
                 }

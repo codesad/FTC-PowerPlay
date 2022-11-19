@@ -20,6 +20,7 @@ abstract class TeleOpMode: ImplOpMode() {
     abstract val task: AllTasks
     open var useOmniMecanum = false
     var power = .73
+    val linearPower=.7
     lateinit var gamepadEx: GamepadEx
     lateinit var gamepadEx2: GamepadEx
     @Throws(InterruptedException::class)
@@ -27,6 +28,8 @@ abstract class TeleOpMode: ImplOpMode() {
         mecanum = Mecanum(this.hardwareMap)
 //        rr = SampleMecanumDrive(this.hardwareMap)
         claw = hardwareMap.servo.get("claw")
+        sliderServo=hardwareMap.crservo.get("linkage")
+
         sliderRight = hardwareMap.dcMotor.get("sliderRight")
         sliderRight.zeroPowerBehavior=DcMotor.ZeroPowerBehavior.BRAKE
         sliderRight.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER

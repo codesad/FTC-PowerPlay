@@ -19,7 +19,7 @@
  * SOFTWARE.
  */
 
-package com.info1robotics.bobot.EOCV;
+package com.info1robotics.bobot.EOCV.f36h11;
 
 import org.opencv.calib3d.Calib3d;
 import org.opencv.core.CvType;
@@ -37,7 +37,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
 
 import java.util.ArrayList;
 
-public class ATDetectionPipe extends OpenCvPipeline
+public class AprilTagDetectionPipeline_36h11 extends OpenCvPipeline
 {
     private long nativeApriltagPtr;
     private Mat grey = new Mat();
@@ -67,7 +67,7 @@ public class ATDetectionPipe extends OpenCvPipeline
     private boolean needToSetDecimation;
     private final Object decimationSync = new Object();
 
-    public ATDetectionPipe(double tagsize, double fx, double fy, double cx, double cy)
+    public AprilTagDetectionPipeline_36h11(double tagsize, double fx, double fy, double cx, double cy)
     {
         this.tagsize = tagsize;
         this.tagsizeX = tagsize;
@@ -102,7 +102,6 @@ public class ATDetectionPipe extends OpenCvPipeline
     @Override
     public Mat processFrame(Mat input)
     {
-        System.out.println("frame process");
         // Convert to greyscale
         Imgproc.cvtColor(input, grey, Imgproc.COLOR_RGBA2GRAY);
 

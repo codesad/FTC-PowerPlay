@@ -19,8 +19,8 @@ class Mecanum(hardwareMap: HardwareMap) {
         br = hardwareMap.get(DcMotor::class.java, "motorBR")
         br.direction = DcMotorSimple.Direction.FORWARD
         bl.direction = DcMotorSimple.Direction.FORWARD
-        fl.direction = DcMotorSimple.Direction.FORWARD
-        fr.direction = DcMotorSimple.Direction.FORWARD
+        fl.direction = DcMotorSimple.Direction.REVERSE
+        fr.direction = DcMotorSimple.Direction.REVERSE
         fl.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         fr.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         bl.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE

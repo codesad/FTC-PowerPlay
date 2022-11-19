@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 @Autonomous(name = "park test")
 class ParkOpModeTest : AutoOpMode() {
     override val task: Task = sync {
-        telemetry.addData("parkzone", atDetection.detectZone())
-        telemetry.update()
+//        telemetry.addData("parkzone", atDetection.detectZone())
+//        telemetry.update()
     }
 }

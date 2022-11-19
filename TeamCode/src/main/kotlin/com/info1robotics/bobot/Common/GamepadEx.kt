@@ -40,7 +40,7 @@ class GamepadEx(private val gamepad: Gamepad) {
         update()
     }
 
-    fun update() {
+    public fun update() {
         for (key in Analog.values()) {
             analogMap[key] = key.field.get(gamepad) as Float
         }
@@ -61,19 +61,19 @@ class GamepadEx(private val gamepad: Gamepad) {
         stateMap = newStateMap
     }
 
-    fun getAnalog(key: Analog): Float {
+    public fun getAnalog(key: Analog): Float {
         return analogMap[key]!!
     }
 
-    fun getButton(key: Digital): Boolean {
+    public fun getButton(key: Digital): Boolean {
         return stateMap[key]!!
     }
 
-    fun getButtonDown(key: Digital): Boolean {
+    public fun getButtonDown(key: Digital): Boolean {
         return downMap[key]!!
     }
 
-    fun getButtonUp(key: Digital): Boolean {
+    public fun getButtonUp(key: Digital): Boolean {
         return upMap[key]!!
     }
 }
