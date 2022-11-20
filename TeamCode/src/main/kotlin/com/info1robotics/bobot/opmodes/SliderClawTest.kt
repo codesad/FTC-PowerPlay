@@ -30,7 +30,7 @@ class SliderClawTest : TeleOpMode() {
         {
             on(PRESS)
             {
-                +SliderTask(1.0)
+                +SliderTask(.7)
             }
             on(RELEASE)
             {
@@ -41,7 +41,7 @@ class SliderClawTest : TeleOpMode() {
         {
             on(PRESS)
             {
-                +SliderTask(-1.0)
+                +SliderTask(-.7)
             }
             on(RELEASE)
             {
