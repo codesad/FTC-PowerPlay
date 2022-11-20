@@ -29,7 +29,6 @@ abstract class TeleOpMode: ImplOpMode() {
 //        rr = SampleMecanumDrive(this.hardwareMap)
         claw = hardwareMap.servo.get("claw")
         sliderServo=hardwareMap.crservo.get("linkage")
-
         sliderRight = hardwareMap.dcMotor.get("sliderRight")
         sliderRight.zeroPowerBehavior=DcMotor.ZeroPowerBehavior.BRAKE
         sliderRight.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER

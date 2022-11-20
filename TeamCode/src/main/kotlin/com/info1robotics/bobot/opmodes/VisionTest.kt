@@ -8,9 +8,11 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 @Autonomous(name="Vision Test")
 class VisionTest : AutoOpMode() {
     override val task: Task = sync {
-        +wait(4000)
+        +wait(10000)
         + {
-//            telemetry.addData("Detected: ", atDetection.detectZone())
+            println("VISION TEST")
+            println("DETECTED TAG: ${aprilTag.zone}")
+            telemetry.addData("Detected: ", aprilTag.detectZone())
             telemetry.update()
         }
     }

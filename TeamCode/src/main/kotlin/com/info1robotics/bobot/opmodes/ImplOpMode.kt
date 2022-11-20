@@ -24,7 +24,7 @@ open class ImplOpMode : LinearOpMode() {
     var clawOpen=true;
     var linkagePos = 0.0
     open fun onInit() {
-   sliderRight.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER
+        sliderRight.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER
 
     }
     open fun onInitLoop() {

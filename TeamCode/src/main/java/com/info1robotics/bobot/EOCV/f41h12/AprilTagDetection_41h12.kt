@@ -37,7 +37,7 @@ open class AprilTagDetection_41h12(var opMode: LinearOpMode) {
         opMode.telemetry.msTransmissionInterval = 50
     }
 
-    fun detectZone() {
+    fun detectZone(): Int {
         val currentDetections = aprilTagDetectionPipeline.latestDetections
         if (currentDetections.isNotEmpty()) {
             currentDetections.forEach {tag ->
@@ -63,5 +63,8 @@ open class AprilTagDetection_41h12(var opMode: LinearOpMode) {
         opMode.telemetry.addData("April Tag ID in View ", tagInView)
 
         opMode.telemetry.update()
+
+        return zone
     }
+
 }

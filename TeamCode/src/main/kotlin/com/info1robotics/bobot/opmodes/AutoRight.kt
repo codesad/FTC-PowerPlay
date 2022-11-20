@@ -6,21 +6,21 @@ import com.info1robotics.bobot.tasks.TaskBuilder.wait
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.hardware.DcMotor
 
-@Autonomous(name="Default Auto")
-class AutoLeft : AutoOpMode() {
+@Autonomous(name="Default Auto Right")
+class AutoRight : AutoOpMode() {
     override val task: Task = sync {
         +SliderTask(.7)
         +wait(700)
         +SliderTask(.0)
         +wait(2000)
-        +MoveTask(-1.0, 0.0, 0.0, .5, 300)
-        +wait(300)
-        +MoveTask(11.0, 0.0, 0.0, .5, 300)
-        +wait(300)
-        +MoveTask(1.0, 0.0,0.0, .5, 65)
+        +MoveTask(1.0, 0.0, 0.0, .5, 800)
+        +wait(2000)
+        +MoveTask(-1.0, 0.0, 0.0, .5, 400)
+        +wait(2000)
+        +MoveTask(-1.0, 0.0,0.0, .5, 65)
         +wait(300)
         +MoveTask(0.0, 1.0, 0.0, .5, 640)
-        +SleepTask(300)
+        +wait(300)
         +{
             if (zone == 1) {
                 +sync {
