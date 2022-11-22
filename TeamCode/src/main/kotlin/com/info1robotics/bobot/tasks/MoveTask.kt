@@ -11,14 +11,13 @@ class MoveTask(val x: Double, val y: Double, val t: Double, val power: Double, v
                 || abs(context.mecanum.br.currentPosition)>=position||abs(context.mecanum.br.currentPosition)>=position)
     }
    override fun tick() {
-        if (stillRunning())
-        {
+        while (stillRunning()){}
             context.mecanum.br.power=.0;
             context.mecanum.fr.power=.0;
             context.mecanum.bl.power=.0;
             context.mecanum.fl.power=.0;
             state=State.FINISHED;
-        }
+
     }
 
     override fun run() {

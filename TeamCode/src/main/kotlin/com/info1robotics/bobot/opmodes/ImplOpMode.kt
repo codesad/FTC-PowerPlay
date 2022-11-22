@@ -18,6 +18,7 @@ open class ImplOpMode : LinearOpMode() {
     lateinit var sliderLeft: DcMotor
     lateinit var sliderRight: DcMotor
     lateinit var sliderServo: CRServo
+    lateinit var sliderServoLeft: CRServo
     lateinit var claw: Servo
     lateinit var rr: SampleMecanumDrive
 
@@ -39,6 +40,8 @@ open class ImplOpMode : LinearOpMode() {
         rr = SampleMecanumDrive(this.hardwareMap)
         claw = hardwareMap.servo.get("claw")
         sliderServo=hardwareMap.crservo.get("linkage")
+        sliderServoLeft=hardwareMap.crservo.get("linkageLeft")
+
         onInit()
         while (!isStarted) {
             onInitLoop()

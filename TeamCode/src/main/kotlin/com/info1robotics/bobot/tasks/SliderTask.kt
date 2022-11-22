@@ -7,10 +7,10 @@ import kotlin.math.abs
  * Raises or lowers the slider according to the given level.
  * See [Level].
  */
-class SliderTask(val powerq:Double ) : Task() {
+class SliderTask(val power:Double ) : Task() {
     override fun run() {
-        context.sliderRight.power=powerq
-        context.sliderLeft.power=powerq
+        context.sliderRight.power=power
+        context.sliderLeft.power=power
 
     }
 

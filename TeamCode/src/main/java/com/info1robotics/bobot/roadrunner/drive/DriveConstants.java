@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
  *
  * TODO: Tune or adjust the following constants to fit your robot. Note that the non-final
  * fields may also be edited through the dashboard (connect to the robot's WiFi network and
- * navigate to https://192.168.43.1:8080/dash). Make sure to save the values here after you
+ * navigate to http://192.168.43.1:8080/dash). Make sure to save the values here after you
  * adjust them in the dashboard; **config variable changes don't persist between app restarts**.
  *
  * These are not the only parameters; some are located in the localizer classes, drive base classes,
@@ -35,8 +35,8 @@ public class DriveConstants {
      * from DriveVelocityPIDTuner.
      */
     public static final boolean RUN_USING_ENCODER = true;
-    public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(20, 0, 5,
-            getMotorVelocityF(MAX_RPM / 60 * TICKS_PER_REV));
+    public static PIDFCoefficients MOTOR_VELO_PID = new PIDFCoefficients(14, 0, 1,
+            14.39023729955072);
 
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -47,8 +47,8 @@ public class DriveConstants {
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
     public static double WHEEL_RADIUS = 1.9685; // in
-    public static double GEAR_RATIO = 1.08339; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 12.60; // in
+    public static double GEAR_RATIO = 1.09217; // output (wheel) speed / input (motor) speed
+    public static double TRACK_WIDTH = 12.83; // in
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -88,8 +88,8 @@ public class DriveConstants {
      * You are free to raise this on your own if you would like. It is best determined through experimentation.
 
      */
-    public static double MAX_VEL = 40.22057483314033;
-    public static double MAX_ACCEL = 76.22057483314033;
+    public static double MAX_VEL = 40.9479;
+    public static double MAX_ACCEL = 73.22057483314033;
     public static double MAX_ANG_VEL = Math.toRadians(340.3832618862042);
     public static double MAX_ANG_ACCEL = Math.toRadians(340.3832618862042);
 

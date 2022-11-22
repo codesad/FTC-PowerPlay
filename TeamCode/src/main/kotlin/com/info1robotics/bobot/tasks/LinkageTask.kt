@@ -13,15 +13,19 @@ class LinkageTask(val direction:Direction):Task() {
 
     val speed = 0.3
     override fun run() {
-        if(direction == Direction.EXTEND)
-            context.sliderServo.direction = DcMotorSimple.Direction.FORWARD
-        else if(direction == Direction.LOWER)
-            context.sliderServo.direction = DcMotorSimple.Direction.REVERSE
-
-        if(direction != Direction.NONE)
+        if(direction == Direction.LOWER)
+        { context.sliderServo.direction = DcMotorSimple.Direction.FORWARD
+        context.sliderServoLeft.direction= DcMotorSimple.Direction.REVERSE}
+        else if(direction == Direction.EXTEND)
+        {   context.sliderServo.direction = DcMotorSimple.Direction.REVERSE
+            context.sliderServoLeft.direction= DcMotorSimple.Direction.FORWARD}
+        if(direction != Direction.NONE) {
             context.sliderServo.power = speed
-        else
+            context.sliderServoLeft.power = speed
+        } else {
             context.sliderServo.power = 0.0
+            context.sliderServoLeft.power = 0.0
+        }
 
         println("Slider servo run")
     }

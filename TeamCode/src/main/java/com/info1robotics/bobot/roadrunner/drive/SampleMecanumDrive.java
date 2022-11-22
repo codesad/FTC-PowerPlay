@@ -44,7 +44,7 @@ import java.util.List;
 @Config
 public class SampleMecanumDrive extends MecanumDrive {
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(5, 0, 0);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);
 
     public static double LATERAL_MULTIPLIER = 1.17;
 
@@ -111,10 +111,14 @@ public class SampleMecanumDrive extends MecanumDrive {
         leftRear = hardwareMap.get(DcMotorEx.class, "motorBL");
         rightRear = hardwareMap.get(DcMotorEx.class, "motorBR");
         rightFront = hardwareMap.get(DcMotorEx.class, "motorFR");
+        DcMotor sliderLeft = hardwareMap.dcMotor.get("sliderLeft");
+        DcMotor sliderRight = hardwareMap.dcMotor.get("sliderRight");
 //        rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
 //        leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
-//        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
-//        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        sliderLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        sliderRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
