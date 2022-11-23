@@ -32,11 +32,11 @@ abstract class TeleOpMode: ImplOpMode() {
         sliderServoLeft=hardwareMap.crservo.get("linkageLeft")
 
         sliderRight = hardwareMap.dcMotor.get("sliderRight")
-        sliderRight.zeroPowerBehavior=DcMotor.ZeroPowerBehavior.BRAKE
+//        sliderRight.zeroPowerBehavior=DcMotor.ZeroPowerBehavior.BRAKE
         sliderRight.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER
         sliderRight.mode=DcMotor.RunMode.RUN_USING_ENCODER
         sliderLeft = hardwareMap.dcMotor.get("sliderLeft")
-        sliderLeft.zeroPowerBehavior=DcMotor.ZeroPowerBehavior.BRAKE
+//        sliderLeft.zeroPowerBehavior=DcMotor.ZeroPowerBehavior.BRAKE
         sliderLeft.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER
         sliderLeft.mode=DcMotor.RunMode.RUN_USING_ENCODER
         sliderRight.direction = DcMotorSimple.Direction.REVERSE

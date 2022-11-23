@@ -23,29 +23,45 @@ class SliderClawTest : TeleOpMode() {
         {
             on(PRESS)
             {
+                +{
+                    sliderLeft.power = 1.0
+                    sliderRight.power = 1.0
+                }
                 +ClawTask()
+            }
+            on(RELEASE) {
+                + {
+                    sliderLeft.power = 1.0
+                    sliderRight.power = 1.0
+                }
             }
         }
         +digital(DPAD_UP,2)
         {
             on(PRESS)
             {
-                +SliderTask(.7)
+                +{
+                    sliderLeft.power=.7
+                    sliderRight.power=.7
+                }
             }
             on(RELEASE)
             {
-                +SliderTask(0.0)
+              +{
+                  sliderLeft.power = .000
+                  sliderRight.power = .000
+              }
             }
         }
         +digital(DPAD_DOWN,2)
         {
             on(PRESS)
             {
-                +SliderTask(-.7)
+
             }
             on(RELEASE)
             {
-                +SliderTask(0.0)
+                +SliderTask(0.0,SliderTask.Level.CURRENT_POSITION)
             }
         }
 

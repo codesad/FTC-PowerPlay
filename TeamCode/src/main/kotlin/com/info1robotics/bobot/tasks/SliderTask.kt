@@ -29,7 +29,7 @@ class SliderTask(val power:Double,var level:Level ) : Task() {
     {
         positionTick=position;
     }
-    fun setCurrent ()
+    fun setCurrent()
     {
         currentSlider=context.sliderLeft.currentPosition
     }

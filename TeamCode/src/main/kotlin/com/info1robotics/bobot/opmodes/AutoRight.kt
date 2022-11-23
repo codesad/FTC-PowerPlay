@@ -9,9 +9,9 @@ import com.qualcomm.robotcore.hardware.DcMotor
 @Autonomous(name="Default Auto Right")
 class AutoRight : AutoOpMode() {
     override val task: Task = sync {
-        +SliderTask(.7)
+        +SliderTask(.7,SliderTask.Level.MANUAL_UP)
         +wait(700)
-        +SliderTask(.0)
+        +SliderTask(.0,SliderTask.Level.CURRENT_POSITION)
         +wait(2000)
         +MoveTask(1.0, 0.0, 0.0, .5, 800)
         +wait(2000)
