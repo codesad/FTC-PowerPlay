@@ -8,7 +8,7 @@ import kotlin.math.abs
  * Raises or lowers the slider according to the given level.
  * See [Level].
  */
-class SliderTask(val power:Double,var level:Level ) : Task() {
+class SliderTask( var level:Level) : Task() {
     companion object
     {
         public var positionTick =1;
@@ -17,7 +17,7 @@ class SliderTask(val power:Double,var level:Level ) : Task() {
     enum class Level(var tick:Int)
     {
         GROUND(0),
-        LOW(0),
+        LOW(500),
         MID(0),
         HIGH(0),
         MANUAL_DOWN(0),
@@ -35,18 +35,23 @@ class SliderTask(val power:Double,var level:Level ) : Task() {
     }
 
     override fun run() {
-        setCurrent()
-        context.sliderLeft.targetPosition=level.tick
-        context.sliderRight.targetPosition=level.tick
+      context.sliderLeft.targetPosition=level.tick
+       context.sliderRight.targetPosition=level.tick
         context.sliderLeft.mode=DcMotor.RunMode.RUN_TO_POSITION
         context.sliderLeft.mode=DcMotor.RunMode.RUN_TO_POSITION
-        context.sliderRight.power=power
-        context.sliderLeft.power=power
-        while (context.sliderRight.isBusy&&context.sliderLeft.isBusy)
-        {}
-        context.sliderRight.power=.0
-        context.sliderLeft.power=.0
-        state=State.FINISHED
+        context.sliderRight.power=.8
+        context.sliderLeft.power=.8
+    }
+
+    override fun tick() {
+        if (!context.sliderRight.isBusy&&!context.sliderLeft.isBusy)
+        {
+            context.sliderRight.power=.0
+            context.sliderLeft.power=.0
+            state=State.FINISHED
+
+        }
+
     }
    }
 
