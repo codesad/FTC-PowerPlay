@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 @TeleOp
 class PositiomSlider:AutoOpMode() {
     override val task: AllTasks = all {
-        +SliderTask(SliderTask.Level.LOW)
+        +SliderTask(SliderTask.Level.MID)
 
 
     }

@@ -1,5 +1,6 @@
 package com.info1robotics.bobot.tasks
 
+import com.acmerobotics.dashboard.config.Config
 import com.qualcomm.robotcore.hardware.DcMotor
 import java.util.logging.Level
 import kotlin.math.abs
@@ -8,6 +9,7 @@ import kotlin.math.abs
  * Raises or lowers the slider according to the given level.
  * See [Level].
  */
+@Config
 class SliderTask( var level:Level) : Task() {
     companion object
     {
@@ -18,7 +20,7 @@ class SliderTask( var level:Level) : Task() {
     {
         GROUND(0),
         LOW(500),
-        MID(0),
+        MID(1200),
         HIGH(0),
         MANUAL_DOWN(0),
         MANUAL_UP(1000000000),
@@ -44,7 +46,7 @@ class SliderTask( var level:Level) : Task() {
     }
 
     override fun tick() {
-        if (!context.sliderRight.isBusy&&!context.sliderLeft.isBusy)
+        if (!context.sliderRight.isBusy && !context.sliderLeft.isBusy)
         {
             context.sliderRight.power=.0
             context.sliderLeft.power=.0
