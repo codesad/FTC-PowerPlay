@@ -17,12 +17,12 @@ class ArmCorrectorTask :Task(){
     override fun run() {
         if( startPosition!=context.sliderLeft.currentPosition)
        {
-           +SliderTask(.6*((startPosition-context.sliderLeft.currentPosition)/
-                   abs(startPosition-context.sliderLeft.currentPosition)),SliderTask.Level.CURRENT_POSITION)
+//           +SliderTask(.6*((startPosition-context.sliderLeft.currentPosition)/
+//                   abs(startPosition-context.sliderLeft.currentPosition)),SliderTask.Level.CURRENT_POSITION)
        }
         while(startPosition!=context.sliderLeft.currentPosition)
         {}
-        +SliderTask(.0,SliderTask.Level.CURRENT_POSITION)
+//        +SliderTask(.0,SliderTask.Level.CURRENT_POSITION)
         state=State.FINISHED
     }
 

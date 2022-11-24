@@ -3,8 +3,8 @@ package com.info1robotics.bobot.tasks
 class ClawTask:Task() {
 
 public  companion object{
-    val openPosition=.6
-    val closedPosition=1.0
+    val openPosition=.55
+    val closedPosition=.8
 }
 
     override fun tick() {

@@ -2,6 +2,7 @@ package com.info1robotics.bobot.opmodes
 
 import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.roadrunner.geometry.Pose2d
+import com.acmerobotics.roadrunner.geometry.Vector2d
 import com.info1robotics.bobot.roadrunner.drive.SampleMecanumDrive
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
@@ -28,36 +29,13 @@ class TestAuto : LinearOpMode() {
     @Throws(InterruptedException::class)
     override fun runOpMode() {
         val drive = SampleMecanumDrive(hardwareMap)
-        val forward = drive.trajectoryBuilder(Pose2d())
-            .forward(UP_DISTANCE_BETWEEN_TILES)
-            .build()
-        val right = drive.trajectoryBuilder(forward.end())
-            .strafeRight(RIGHT_DISTANCE_BETWEEN_TILES)
-            .build()
-        val back = drive.trajectoryBuilder(right.end())
-            .back(DOWN_DISTANCE_BETWEEN_TILES)
-            .build()
-        val left = drive.trajectoryBuilder(back.end())
-            .strafeLeft(LEFT_DISTANCE_BETWEEN_TILES)
-            .build()
+
+        val test = drive.trajectoryBuilder(Pose2d(-60.0, 36.0))
+
+
 
         waitForStart()
-        while (opModeIsActive() && !isStopRequested) {
-            drive.followTrajectory(forward)
-            drive.followTrajectory(right)
-            drive.followTrajectory(back)
-            drive.followTrajectory(left)
-        }
     }
 
-    companion object {
-        @JvmField
-        var UP_DISTANCE_BETWEEN_TILES = 27.0
-        @JvmField
-        var RIGHT_DISTANCE_BETWEEN_TILES = 33.0
-        @JvmField
-        var DOWN_DISTANCE_BETWEEN_TILES = 28.0
-        @JvmField
-        var LEFT_DISTANCE_BETWEEN_TILES = 30.0
-    }
+
 }

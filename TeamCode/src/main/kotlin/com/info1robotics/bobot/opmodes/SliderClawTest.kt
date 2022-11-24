@@ -23,18 +23,10 @@ class SliderClawTest : TeleOpMode() {
         {
             on(PRESS)
             {
-                +{
-                    sliderLeft.power = 1.0
-                    sliderRight.power = 1.0
-                }
+
                 +ClawTask()
             }
-            on(RELEASE) {
-                + {
-                    sliderLeft.power = 1.0
-                    sliderRight.power = 1.0
-                }
-            }
+
         }
         +digital(DPAD_UP,2)
         {
@@ -61,7 +53,7 @@ class SliderClawTest : TeleOpMode() {
             }
             on(RELEASE)
             {
-                +SliderTask(0.0,SliderTask.Level.CURRENT_POSITION)
+//                +SliderTask(0.0,SliderTask.Level.CURRENT_POSITION)
             }
         }
 
