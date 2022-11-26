@@ -3,7 +3,7 @@ package com.info1robotics.bobot.tasks
 import androidx.core.math.MathUtils.clamp
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 
-class LinkageTask(val direction:Direction):Task() {
+class LinkageTask( var power:Double,val direction:Direction):Task() {
     enum class Direction
     {
         EXTEND,
@@ -11,7 +11,7 @@ class LinkageTask(val direction:Direction):Task() {
         NONE
     }
 
-    val speed = 0.3
+    val speed = power
     override fun run() {
         if(direction == Direction.LOWER)
         { context.sliderServo.direction = DcMotorSimple.Direction.FORWARD

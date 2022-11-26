@@ -51,9 +51,7 @@ class SliderTask( var level:Level) : Task() {
             context.sliderRight.power=.0
             context.sliderLeft.power=.0
             state=State.FINISHED
-
         }
-
     }
    }
 

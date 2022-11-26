@@ -40,7 +40,6 @@ abstract class TeleOpMode: ImplOpMode() {
         sliderLeft.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER
         sliderLeft.mode=DcMotor.RunMode.RUN_USING_ENCODER
         sliderRight.direction = DcMotorSimple.Direction.REVERSE
-        claw.position = ClawTask.openPosition
         gamepadEx = GamepadEx(gamepad1)
         gamepadEx2 = GamepadEx(gamepad2)
         onInit()
