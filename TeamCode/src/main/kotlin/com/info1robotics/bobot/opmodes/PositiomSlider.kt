@@ -10,10 +10,26 @@ import com.info1robotics.bobot.tasks.TaskBuilder.digital
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 
 @TeleOp
-class PositiomSlider:AutoOpMode() {
+class PositiomSlider:TeleOpMode() {
     override val task: AllTasks = all {
-        +SliderTask(SliderTask.Level.MID)
-
-
+        +digital(DPAD_UP) {
+            on(DigitalTask.Type.PRESS) {
+                +SliderTask(SliderTask.Level.MID)
+            }
+        }
+        +digital(DPAD_DOWN) {
+            on(DigitalTask.Type.PRESS) {
+                + {
+                    sliderRight.power = -1.0
+                    sliderLeft.power = -1.0
+                }
+            }
+            on(DigitalTask.Type.RELEASE) {
+                + {
+                    sliderRight.power = 0.0
+                    sliderLeft.power = 0.0
+                }
+            }
+        }
     }
 }

@@ -17,7 +17,7 @@ open class AprilTagDetection_36h11(var opMode: LinearOpMode) {
     private val cy = 221.506
     private val tagSize = 0.166
     private var zone = 0
-    private var tagInView = 0
+    var tagInView = 0
     private var parkZone = ""
     val camera: OpenCvCamera
     private val aprilTagDetectionPipeline: AprilTagDetectionPipeline_36h11

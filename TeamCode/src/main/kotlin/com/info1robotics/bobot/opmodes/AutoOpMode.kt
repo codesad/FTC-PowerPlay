@@ -1,10 +1,12 @@
 package com.info1robotics.bobot.opmodes
 
 import com.info1robotics.bobot.Common.Mecanum
+import com.info1robotics.bobot.roadrunner.drive.SampleMecanumDrive
 
 import com.info1robotics.bobot.tasks.*
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
+import com.qualcomm.robotcore.hardware.ServoControllerEx
 import org.firstinspires.ftc.teamcode.EOCV.f41h12.AprilTagDetection_41h12
 import org.openftc.apriltag.AprilTagDetection
 
@@ -13,6 +15,7 @@ import org.openftc.apriltag.AprilTagDetection
  * @property task The task to be executed. See extension functions in [TaskBuilder].
  */
 abstract class AutoOpMode: ImplOpMode() {
+    lateinit var drive: SampleMecanumDrive
     abstract val task: Task
 
     lateinit var aprilTag: AprilTagDetection_41h12

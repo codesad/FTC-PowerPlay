@@ -6,18 +6,21 @@ import java.util.logging.Level
 import kotlin.math.abs
 
 /**
- * Raises or lowers the slider according to the given level.
+ * Ra   ises or lowers the slider according to the given level.
  * See [Level].
  */
 @Config
-class SliderTask( var level:Level) : Task() {
-    companion object
-    {
-        public var positionTick =1;
-        private var currentSlider=1;
+class SliderTask(var level: Level) : Task() {
+    companion object {
+        public var positionTick = 1;
+        private var currentSlider = 1;
     }
-    enum class Level(var tick:Int)
-    {
+
+    constructor(position: Int): this(Level.TO_POSITION) {
+        setLevelPosition(position)
+    }
+
+    enum class Level(var tick: Int) {
         GROUND(0),
         LOW(500),
         MID(1200),
@@ -27,31 +30,39 @@ class SliderTask( var level:Level) : Task() {
         TO_POSITION(positionTick),
         CURRENT_POSITION(currentSlider)
     }
-    fun setLevelPosition( position:Int)
-    {
-        positionTick=position;
+
+    fun setLevelPosition(position: Int) {
+        positionTick = position;
     }
-    fun setCurrent()
-    {
-        currentSlider=context.sliderLeft.currentPosition
+
+    fun setCurrent() {
+        currentSlider = context.sliderLeft.currentPosition
     }
 
     override fun run() {
-      context.sliderLeft.targetPosition=level.tick
-       context.sliderRight.targetPosition=level.tick
-        context.sliderLeft.mode=DcMotor.RunMode.RUN_TO_POSITION
-        context.sliderLeft.mode=DcMotor.RunMode.RUN_TO_POSITION
-        context.sliderRight.power=.8
-        context.sliderLeft.power=.8
+        context.sliderLeft.targetPosition = level.tick
+        context.sliderRight.targetPosition = level.tick
+        context.sliderRight.power = .9
+        context.sliderLeft.power = .9
+        context.sliderLeft.mode = DcMotor.RunMode.RUN_TO_POSITION
+        context.sliderLeft.mode = DcMotor.RunMode.RUN_TO_POSITION
     }
 
     override fun tick() {
-        if (!context.sliderRight.isBusy && !context.sliderLeft.isBusy)
-        {
-            context.sliderRight.power=.0
-            context.sliderLeft.power=.0
-            state=State.FINISHED
+        println("state: $state")
+//        println("left: " + context.sliderLeft.currentPosition)
+//        println("right: " + context.sliderRight.currentPosition)
+//        println("error: $error")
+//        if ((!context.sliderRight.isBusy || !context.sliderLeft.isBusy)) {
+        if (context.sliderLeft.currentPosition == context.sliderLeft.targetPosition ||
+            context.sliderRight.currentPosition == context.sliderRight.targetPosition) {
+            println("done")
+            println(context.sliderLeft.isBusy)
+            println(context.sliderRight.isBusy)
+            context.sliderRight.power = .0
+            context.sliderLeft.power = .0
+            state = State.FINISHED
         }
     }
-   }
+}
 

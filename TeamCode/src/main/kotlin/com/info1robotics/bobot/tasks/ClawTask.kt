@@ -4,7 +4,7 @@ class ClawTask:Task() {
 
 public  companion object{
     val openPosition=.55
-    val closedPosition=.72
+    val closedPosition=.95
 }
 
     override fun tick() {

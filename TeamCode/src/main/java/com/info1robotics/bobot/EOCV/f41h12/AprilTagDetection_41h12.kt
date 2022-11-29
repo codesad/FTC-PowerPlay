@@ -41,6 +41,7 @@ open class AprilTagDetection_41h12(var opMode: LinearOpMode) {
         val currentDetections = aprilTagDetectionPipeline.latestDetections
         if (currentDetections.isNotEmpty()) {
             currentDetections.forEach {tag ->
+                println(tag.id)
                 tagInView = tag.id
                 when (tag.id) {
                     169 -> zone = 1

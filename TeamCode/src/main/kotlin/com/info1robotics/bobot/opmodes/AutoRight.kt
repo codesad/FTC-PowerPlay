@@ -13,6 +13,8 @@ class AutoRight : AutoOpMode() {
 //        +wait(700)
 //        +SliderTask(.0,SliderTask.Level.CURRENT_POSITION)
 //        +wait(2000)
+        +SliderTask(SliderTask.Level.MID)
+        +wait(1000)
         +MoveTask(1.0, 0.0, 0.0, .5, 800)
         +wait(2000)
         +MoveTask(-1.0, 0.0, 0.0, .5, 400)

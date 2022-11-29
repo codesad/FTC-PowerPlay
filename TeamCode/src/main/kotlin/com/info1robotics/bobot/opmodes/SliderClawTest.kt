@@ -7,6 +7,7 @@ import com.info1robotics.bobot.tasks.DigitalTask.Type.*
 import com.info1robotics.bobot.tasks.TaskBuilder.analog
 import com.info1robotics.bobot.tasks.TaskBuilder.digital
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
+import com.qualcomm.robotcore.hardware.DcMotor
 
 @TeleOp(name = "Official TeleOP")
 class SliderClawTest : TeleOpMode() {
@@ -25,16 +26,35 @@ class SliderClawTest : TeleOpMode() {
 
         }
 
-        +analog(TRIGGER_RIGHT)
+        +digital(BUMPER_RIGHT, 2)
         {
-            on(AnalogTask.Type.HOLD)
+            on(HOLD)
             {
-               +{
-                   sliderLeft.power=position
-                   sliderRight.power=position
+               + {
+                   sliderLeft.mode = DcMotor.RunMode.RUN_USING_ENCODER
+                   sliderRight.mode = DcMotor.RunMode.RUN_USING_ENCODER
+                   sliderLeft.power=.8
+                   sliderRight.power=.8
                }
             }
-            on(AnalogTask.Type.RELEASE)
+            on(RELEASE)
+            {
+                + {
+                    sliderLeft.power=.0
+                    sliderRight.power=.0
+                }
+            }
+        }
+        +digital(BUMPER_LEFT, 2)
+        {
+            on(HOLD)
+            {
+                +{
+                    sliderLeft.power=-.8
+                    sliderRight.power=-.8
+                }
+            }
+            on(RELEASE)
             {
                 +{
                     sliderLeft.power=.0
@@ -42,31 +62,31 @@ class SliderClawTest : TeleOpMode() {
                 }
             }
         }
-        +analog(TRIGGER_LEFT)
-        {
-            on(AnalogTask.Type.HOLD)
-            {
-                +{
-                    sliderLeft.power=-1*position
-                    sliderRight.power=-1*position
-                }
-            }
-            on(AnalogTask.Type.RELEASE)
-            {
-                +{
-                    sliderLeft.power=.0
-                    sliderRight.power=.0
-                }
-            }
-        }
-        +analog(JOYSTICK_LEFT_Y)
-        {
-            on(AnalogTask.Type.HOLD)
-            {
-                +LinkageTask(position,LinkageTask.Direction.EXTEND)
+        + {
+            sliderLeft.mode = DcMotor.RunMode.RUN_USING_ENCODER
+            sliderRight.mode = DcMotor.RunMode.RUN_USING_ENCODER
+            sliderRight.power = gamepad2.right_trigger - gamepad2.left_trigger.toDouble()
+            sliderLeft.power = gamepad2.right_trigger - gamepad2.left_trigger.toDouble()
 
+        }
+        +digital(DPAD_UP, 2)
+        {
+            on(HOLD)
+            {
+                +LinkageTask(.9,LinkageTask.Direction.EXTEND)
             }
-            on(AnalogTask.Type.RELEASE)
+            on(RELEASE)
+            {
+                +LinkageTask(.0,LinkageTask.Direction.NONE)
+            }
+        }
+        +digital(DPAD_DOWN, 2)
+        {
+            on(HOLD)
+            {
+                +LinkageTask(-.9,LinkageTask.Direction.EXTEND)
+            }
+            on(RELEASE)
             {
                 +LinkageTask(.0,LinkageTask.Direction.NONE)
             }

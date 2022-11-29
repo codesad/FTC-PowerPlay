@@ -27,7 +27,6 @@ open class ImplOpMode : LinearOpMode() {
     open fun onInit() {
         sliderRight.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER
         sliderLeft.mode=DcMotor.RunMode.STOP_AND_RESET_ENCODER
-claw.position=.5;
     }
     open fun onInitLoop() {
 
