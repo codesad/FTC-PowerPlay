@@ -56,7 +56,6 @@ class SliderTask(var level: Level) : Task() {
 //        if ((!context.sliderRight.isBusy || !context.sliderLeft.isBusy)) {
         if (context.sliderLeft.currentPosition == context.sliderLeft.targetPosition ||
             context.sliderRight.currentPosition == context.sliderRight.targetPosition) {
-            println("done")
             println(context.sliderLeft.isBusy)
             println(context.sliderRight.isBusy)
             context.sliderRight.power = .0

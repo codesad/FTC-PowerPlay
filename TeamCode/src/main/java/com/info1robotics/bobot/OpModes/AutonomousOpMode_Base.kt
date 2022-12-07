@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.OpModes
 
 import com.outoftheboxrobotics.photoncore.PhotonCore
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
-import org.firstinspires.ftc.teamcode.Common.StateOpMode
 import org.firstinspires.ftc.teamcode.EOCV.f41h12.AprilTagDetection_41h12
 
 @Autonomous(name = "AutonomousOpMode w/ AprilTag Detection")
