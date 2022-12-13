@@ -12,8 +12,8 @@ public abstract class ImplOpMode extends LinearOpMode {
     public DcMotor pivotLeft;
     public DcMotor pivotRight;
     public DcMotor sliderRight;
-    public CRServo linkageRight;
-    public CRServo linkageLeft;
+    public Servo linkageRight;
+    public Servo linkageLeft;
     public Servo claw;
     public boolean clawOpen = true;
     public float linkagePos = 0f;
@@ -29,8 +29,8 @@ public abstract class ImplOpMode extends LinearOpMode {
     public void initHardwareMap() {
         sliderRight = hardwareMap.dcMotor.get("sliderRight");
         pivotLeft = hardwareMap.dcMotor.get("sliderLeft");
-        linkageLeft=hardwareMap.crservo.get("linkageLeft");
-        linkageRight=hardwareMap.crservo.get("linkage");
+        linkageLeft = hardwareMap.servo.get("linkageLeft");
+        linkageRight = hardwareMap.servo.get("linkageRight");
         sliderRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         sliderRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         sliderRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
