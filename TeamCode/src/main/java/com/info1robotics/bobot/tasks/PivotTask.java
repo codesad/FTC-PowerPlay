@@ -1,5 +1,7 @@
 package com.info1robotics.bobot.tasks;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
+
 public class PivotTask extends Task {
     public enum Level {
         GROUND(0),
@@ -8,7 +10,7 @@ public class PivotTask extends Task {
         HIGH(2300),
         MANUAL(14821234);
         public final int tick;
-        private Level(int tick) {
+        Level(int tick) {
             this.tick = tick;
         }
     }
@@ -17,10 +19,16 @@ public class PivotTask extends Task {
     private int desiredPosition=3;
     @Override
     public void run(){
+        if(level == Level.MANUAL) {
+            context.pivotLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            context.pivotRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        } else {
+            context.pivotLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            context.pivotRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
 
         context.pivotRight.setPower(power);
         context.pivotLeft.setPower(power);
-
     }
     @Override
     public void tick(){
@@ -30,8 +38,8 @@ public class PivotTask extends Task {
         }
         else
         {
-            if(context.pivotRight.getCurrentPosition()==desiredPosition||
-                    context.pivotLeft.getCurrentPosition()==desiredPosition)
+            if(!context.pivotRight.isBusy()||
+                    !context.pivotLeft.isBusy())
             {
                 context.pivotRight.setPower(.0);
                 context.pivotLeft.setPower(.0);
@@ -39,22 +47,22 @@ public class PivotTask extends Task {
             }
         }
     }
-    PivotTask(double power){
+    public PivotTask(double power){
         this.power=power;
     }
-    PivotTask(Level level,double power){
+    public PivotTask(Level level,double power){
         desiredPosition= level.tick;
         this.level=level;
         this.power=power;
     }
-    PivotTask(Level level){
+    public PivotTask(Level level){
         desiredPosition= level.tick;
         this.level=level;
     }
-    PivotTask(int position){
+    public PivotTask(int position){
         this.desiredPosition=position;
     }
-    PivotTask(int position,double power){
+    public PivotTask(int position,double power){
         this.desiredPosition=position;
         this.power=power;
     }

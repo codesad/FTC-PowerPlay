@@ -1,6 +1,7 @@
 package com.info1robotics.bobot.OpModes.templates;
 
 import com.info1robotics.bobot.Common.Mecanum;
+import com.info1robotics.bobot.roadrunner.drive.SampleMecanumDrive;
 import com.info1robotics.bobot.tasks.ClawTask;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -17,14 +18,15 @@ public abstract class ImplOpMode extends LinearOpMode {
     public Servo claw;
     public boolean clawOpen = true;
     public float linkagePos = 0f;
+    public SampleMecanumDrive drive= new SampleMecanumDrive(this.hardwareMap);
 
-    public void onInitLoop() {};
+    public void onInitLoop() {}
     public void onInit() {
         initHardwareMap();
-    };
-    public void onStart() {};
-    public void onLoop() {};
-    public void onEnd() {};
+    }
+    public void onStart() {}
+    public void onLoop() {}
+    public void onEnd() {}
 
     public void initHardwareMap() {
         sliderRight = hardwareMap.dcMotor.get("sliderRight");

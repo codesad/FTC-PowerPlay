@@ -3,14 +3,16 @@ package com.info1robotics.bobot.OpModes.templates;
 import androidx.annotation.CallSuper;
 
 import com.info1robotics.bobot.Common.GamepadEx;
+import com.info1robotics.bobot.roadrunner.drive.SampleMecanumDrive;
 import com.info1robotics.bobot.tasks.AllTask;
 
 public class TeleOpMode extends ImplOpMode {
     public AllTask task;
-    public boolean useOmniMecanum = false;
+    public boolean useOmniMecanum = true;
     public double power = .73;
     public GamepadEx gamepadEx;
     public GamepadEx gamepadEx2;
+
 
     @CallSuper
     @Override
