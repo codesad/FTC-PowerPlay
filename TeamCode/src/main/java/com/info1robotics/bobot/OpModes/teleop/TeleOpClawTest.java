@@ -1,8 +1,9 @@
 package com.info1robotics.bobot.OpModes.teleop;
 
-import com.info1robotics.bobot.Common.GamepadEx;
 import com.info1robotics.bobot.OpModes.templates.TeleOpMode;
 import com.info1robotics.bobot.tasks.AllTask;
+import com.info1robotics.bobot.tasks.AnalogTask;
+import com.info1robotics.bobot.tasks.DigitalTask;
 import com.info1robotics.bobot.tasks.InlineTask;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -12,19 +13,24 @@ public class TeleOpClawTest extends TeleOpMode {
     public void onInit() {
         super.onInit();
         task = new AllTask(
-                new InlineTask(() -> {
-                    if (gamepadEx.getButtonDown("a")) {
-                        linkageLeft.setPosition(1.0);
-                        linkageRight.setPosition(0.0);
-                    }
-                }),
-
-                new InlineTask(() -> {
-                    if (gamepadEx.getButtonDown("b")) {
-                        linkageLeft.setPosition(0.0);
-                        linkageRight.setPosition(1.0);
-                    }
-                })
+                new DigitalTask(
+                        "a", 1,
+                        new DigitalTask.ActionPair(DigitalTask.Type.HOLD, new InlineTask(() -> {
+                            System.out.println("pressed a");
+                        })),
+                        new DigitalTask.ActionPair(DigitalTask.Type.RELEASE, new InlineTask(() -> {
+                            System.out.println("released a");
+                        })),
+                        new DigitalTask.ActionPair(DigitalTask.Type.RELEASE, new InlineTask(() -> {
+                            System.out.println("holding a");
+                        }))
+                ),
+                new AnalogTask(
+                        "joystick_left", 1,
+                        new AnalogTask.ActionPair(AnalogTask.Type.HOLD, new InlineTask(() -> {
+                            System.out.println("Holding down at " + gamepadEx.getAnalog("joystick_left"));
+                        }))
+                )
         );
     }
 }
