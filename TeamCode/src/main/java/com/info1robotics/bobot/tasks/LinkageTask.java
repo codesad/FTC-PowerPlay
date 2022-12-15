@@ -29,8 +29,8 @@ public class LinkageTask extends Task{
             posLeft=direction.posLeft;
             posRight=direction.posRight;
         }
-        context.linkageLeft.setPosition(posLeft);
-        context.linkageRight.setPosition(posRight);
+//        context.linkageLeft.setPosition(posLeft);
+//        context.linkageRight.setPosition(posRight);
         state=State.FINISHED;
     }
     LinkageTask(double position)

@@ -1,16 +1,10 @@
 package com.info1robotics.bobot.tasks;
 
-import android.drm.DrmStore;
-import android.util.Pair;
-
 import com.info1robotics.bobot.Common.GamepadEx;
 import com.info1robotics.bobot.OpModes.templates.TeleOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class DigitalTask extends Task {
     public String button;

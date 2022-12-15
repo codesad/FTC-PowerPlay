@@ -113,9 +113,9 @@ public class SampleMecanumDrive extends MecanumDrive {
         rightFront = hardwareMap.get(DcMotorEx.class, "motorFR");
         DcMotor sliderLeft = hardwareMap.dcMotor.get("sliderLeft");
         DcMotor sliderRight = hardwareMap.dcMotor.get("sliderRight");
-//        rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
 //        leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+//        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         sliderLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         sliderRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -212,8 +212,7 @@ public class SampleMecanumDrive extends MecanumDrive {
     }
 
     public void waitForIdle() {
-        while (!Thread.currentThread().isInterrupted() && isBusy())
-            update();
+        while (!Thread.currentThread().isInterrupted() && isBusy()) update();
     }
 
     public boolean isBusy() {

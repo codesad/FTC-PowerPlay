@@ -24,4 +24,9 @@ public class AllTask extends CompoundTask {
             }
         }
     }
+
+    @Override
+    public void run() {
+        for (Task child : children) child.start(context);
+    }
 }

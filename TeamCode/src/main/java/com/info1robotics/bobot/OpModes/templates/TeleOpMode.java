@@ -33,10 +33,12 @@ public class TeleOpMode extends ImplOpMode {
                     power
             );
         }
+        gamepadEx.update();
+        gamepadEx2.update();
     }
 
     @Override
     public void onStart() {
-        task.run();
+        task.start(this);
     }
 }

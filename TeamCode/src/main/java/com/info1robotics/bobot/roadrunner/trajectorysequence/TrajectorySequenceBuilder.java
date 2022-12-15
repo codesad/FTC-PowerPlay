@@ -459,7 +459,6 @@ public class TrajectorySequenceBuilder {
     public TrajectorySequenceBuilder waitSeconds(double seconds) {
         pushPath();
         sequenceSegments.add(new WaitSegment(lastPose, seconds, Collections.emptyList()));
-
         currentDuration += seconds;
         return this;
     }

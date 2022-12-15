@@ -9,8 +9,15 @@ public class ClawTask extends Task {
 
     @Override
     public void run() {
-        if (!context.clawOpen) context.claw.setPosition(openPosition);
-        else context.claw.setPosition(closedPosition);
+        if (!context.clawOpen) {
+            context.claw.setPosition(openPosition);
+            context.clawOpen = true;
+        }
+        else {
+            context.claw.setPosition(closedPosition);
+            context.clawOpen = false;
+        }
+        System.out.println(context.clawOpen);
         state = State.FINISHED;
     }
 }

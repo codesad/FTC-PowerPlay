@@ -12,6 +12,7 @@ public class InlineTask extends Task {
 
     @Override
     public void run() {
+        System.out.println("InlineTask was ran.");
         runnable.run();
         state = State.FINISHED;
     }
