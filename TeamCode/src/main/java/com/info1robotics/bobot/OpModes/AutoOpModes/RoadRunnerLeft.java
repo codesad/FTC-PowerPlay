@@ -15,28 +15,28 @@ import com.info1robotics.bobot.tasks.TrajectoryTask;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Config
-@Autonomous(name = "Road Runner Right")
-public class RoadRunnerTest extends AutoOpMode {
+@Autonomous(name = "Road Runner Left")
+public class RoadRunnerLeft extends AutoOpMode {
     public  static double START_HEADING = 90.0;
-    public  static double PRELOAD_X = 32.0;
-    public  static double PRELOAD_Y = -30.0;
-    public  static double PRELOAD_HEADING = 180.0;
-    public  static double PRELOAD_TANGENT = 60.0;
-    public  static double TILE_X = 36.0;
-    public  static double TILE_Y = -13.5;
-    public  static double CONE_STACK_X = 55.5;
-    public  static double CONE_STACK_Y = -15.5;
-    public  static double MID_FORWARD = 3.0;
-    public  static double CONE_STACK_HEADING = 0.0;
-    public  static double MID_X = 20.0;
+    public  static double PRELOAD_X = -31.6;
+    public  static double PRELOAD_Y = -32.0;
+    public  static double PRELOAD_HEADING = 0.0;
+    public  static double PRELOAD_TANGENT = 75.0;
+    public  static double TILE_X = -36.0;
+    public  static double TILE_Y = -18.5;
+    public  static double CONE_STACK_X = -59.4;
+    public  static double CONE_STACK_Y = -20.0;
+    public  static double MID_FORWARD = 2.85;
+    public  static double CONE_STACK_HEADING = -180.0;
+    public  static double MID_X = -24.0;
     public  static double MID_Y = -18.8;
-    public  static double MID_HEADING = -90.0;
-    public  static double PARK_1_X = 30.0;
-    public  static double PARK_1_Y = -13.5;
+    public  static double MID_HEADING = 270.0;
+    public  static double PARK_1_X = -57.8;
+    public  static double PARK_1_Y = -18.5;
     public  static double PARK_2_X = -36.0;
-    public  static double PARK_2_Y = -13.5;
-    public  static double PARK_3_X = 53.0;
-    public  static double PARK_3_Y = -13.5;
+    public  static double PARK_2_Y = -18.0;
+    public  static double PARK_3_X = -15.5;
+    public  static double PARK_3_Y = -18.0;
     public Trajectory startTrajectory;
     public Trajectory tileTrajectory;
     public Trajectory tileToStackTrajectory;
@@ -47,16 +47,26 @@ public class RoadRunnerTest extends AutoOpMode {
     public Trajectory park1Trajectory;
     public Trajectory park2Trajectory;
     public Trajectory park3Trajectory;
+    public Trajectory pushTrajectory;
+    public Trajectory backTrajectory;
+    public static double PUSH = 10.0;
+
     @Override
     public void onInit() {
         claw.setPosition(ClawTask.closedPosition);
         clawOpen = false;
-        drive.setPoseEstimate(new Pose2d(36.0, -72.0, Math.toRadians(START_HEADING)));
-        startTrajectory = drive.trajectoryBuilder(new Pose2d(36.0, -72.0, Math.toRadians(START_HEADING)))
+        drive.setPoseEstimate(new Pose2d(-36.0, -72.0, Math.toRadians(START_HEADING)));
+        startTrajectory = drive.trajectoryBuilder(new Pose2d(-36.0, -72.0, Math.toRadians(START_HEADING)))
                 .splineToLinearHeading(new Pose2d(PRELOAD_X, PRELOAD_Y, Math.toRadians(PRELOAD_HEADING)), Math.toRadians(PRELOAD_TANGENT))
                 .build();
         tileTrajectory = drive.trajectoryBuilder(startTrajectory.end())
                 .lineTo(new Vector2d(TILE_X, TILE_Y))
+                .build();
+        pushTrajectory = drive.trajectoryBuilder(tileTrajectory.end())
+                .lineTo(new Vector2d(TILE_X, TILE_Y + PUSH))
+                .build();
+        backTrajectory = drive.trajectoryBuilder(pushTrajectory.end())
+                .lineTo(new Vector2d(TILE_X, TILE_Y - PUSH))
                 .build();
         tileToStackTrajectory = drive.trajectoryBuilder(tileTrajectory.end())
                 .lineToLinearHeading(new Pose2d(CONE_STACK_X, CONE_STACK_Y, Math.toRadians(CONE_STACK_HEADING)))
@@ -86,14 +96,12 @@ public class RoadRunnerTest extends AutoOpMode {
         task = new SyncTask(
                 new SleepTask(50),
                 new AsyncTask(
-                    new TrajectoryTask(startTrajectory),
-                    new PivotTask(PivotTask.Level.MID)
+                        new TrajectoryTask(startTrajectory),
+                        new PivotTask(PivotTask.Level.MID)
                 ),
                 new PivotTask(PivotTask.Level.DROP_MID),
                 new ClawTask(),
                 new SleepTask(200),
-                new TrajectoryTask(tileTrajectory),
-                new SleepTask(300),
                 new TrajectoryTask(tileToStackTrajectory),
                 new SleepTask(600),
                 new PivotTask(PivotTask.Level.CONE_5),
@@ -101,8 +109,8 @@ public class RoadRunnerTest extends AutoOpMode {
                 new ClawTask(),
                 new SleepTask(600),
                 new AsyncTask(
-                    new TrajectoryTask(stackToMidTrajectory),
-                    new PivotTask(PivotTask.Level.MID)
+                        new TrajectoryTask(stackToMidTrajectory),
+                        new PivotTask(PivotTask.Level.MID)
                 ),
                 new SleepTask(300),
                 new TrajectoryTask(midForwardTrajectory),

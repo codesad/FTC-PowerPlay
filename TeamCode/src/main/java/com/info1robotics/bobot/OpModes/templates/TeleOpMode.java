@@ -9,7 +9,7 @@ import com.info1robotics.bobot.tasks.AllTask;
 public class TeleOpMode extends ImplOpMode {
     public AllTask task;
     public boolean useOmniMecanum = true;
-    public double power = .73;
+    public double power = .65;
     public GamepadEx gamepadEx;
     public GamepadEx gamepadEx2;
 
@@ -19,6 +19,7 @@ public class TeleOpMode extends ImplOpMode {
     public void onInit() {
         gamepadEx = new GamepadEx(gamepad1);
         gamepadEx2 = new GamepadEx(gamepad2);
+        int currentposition = 0;
     }
 
     @CallSuper

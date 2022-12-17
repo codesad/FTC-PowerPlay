@@ -1,14 +1,17 @@
 package com.info1robotics.bobot.tasks;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+@Config
 public class PivotTask extends Task {
     public enum Level {
         GROUND(0),
         LOW(1200),
-        MID(1200),
+        MID(1065),
+        DROP_MID(960),
         HIGH(2300),
-        CONE_5(100),
+        CONE_5(195),
         CONE_4(80),
         MANUAL(14821234);
         public final int tick;
@@ -17,7 +20,7 @@ public class PivotTask extends Task {
         }
     }
     private Level level = Level.MANUAL;
-    private double power = .8;
+    private double power = .55;
     private int desiredPosition = 3;
     @Override
     public void run() {

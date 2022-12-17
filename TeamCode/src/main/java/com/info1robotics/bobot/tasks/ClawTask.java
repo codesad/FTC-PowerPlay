@@ -4,8 +4,8 @@ package com.info1robotics.bobot.tasks;
  * Toggles the claw's state.
  */
 public class ClawTask extends Task {
-    public static double openPosition = .55;
-    public static double closedPosition = .95;
+    public static double openPosition = 0.5;
+    public static double closedPosition = 1.0;
 
     @Override
     public void run() {

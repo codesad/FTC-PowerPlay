@@ -14,12 +14,18 @@ public abstract class AutoOpMode extends ImplOpMode {
     @Override
     @CallSuper
     public void onStart() {
-        System.out.println("Starting Task...");
         task.start(this);
     }
 
     @Override
+    public void initHardwareMap() {
+        aprilTag = new AprilTagDetection_41h12(this);
+        super.initHardwareMap();
+    }
+
+    @Override
     public void onInitLoop() {
+        System.out.println("init loop");
         aprilTag.detectZone();
         if (aprilTag.getZone() != 0) {
             zone = aprilTag.getZone();

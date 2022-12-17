@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * Asynchronously starts and ticks each child.
- * Ends when all children finish.
+ * Never ends.
  */
 public class AllTask extends CompoundTask {
     public AllTask(Task... children) {
@@ -14,13 +14,11 @@ public class AllTask extends CompoundTask {
     @Override
     public void tick() {
         // once all children finish, stop
-        if (Arrays.stream(children).allMatch(Task::isFinished)) {
-            state = State.FINISHED;
-            return;
-        }
         for (Task child : children) {
             if (child.isRunning()) {
                 child.tick();
+            } else {
+                child.start(context);
             }
         }
     }
