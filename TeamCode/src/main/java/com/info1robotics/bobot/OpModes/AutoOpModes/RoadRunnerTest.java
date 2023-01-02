@@ -31,11 +31,11 @@ public class RoadRunnerTest extends AutoOpMode {
     public  static double MID_X = 20.0;
     public  static double MID_Y = -18.8;
     public  static double MID_HEADING = -90.0;
-    public  static double PARK_1_X = 30.0;
+    public  static double PARK_1_X = 53.0;
     public  static double PARK_1_Y = -13.5;
     public  static double PARK_2_X = -36.0;
     public  static double PARK_2_Y = -13.5;
-    public  static double PARK_3_X = 53.0;
+    public  static double PARK_3_X = 30.0;
     public  static double PARK_3_Y = -13.5;
     public Trajectory startTrajectory;
     public Trajectory tileTrajectory;
@@ -84,34 +84,34 @@ public class RoadRunnerTest extends AutoOpMode {
                 .build();
 
         task = new SyncTask(
-                new SleepTask(50),
-                new AsyncTask(
-                    new TrajectoryTask(startTrajectory),
-                    new PivotTask(PivotTask.Level.MID)
-                ),
-                new PivotTask(PivotTask.Level.DROP_MID),
-                new ClawTask(),
-                new SleepTask(200),
-                new TrajectoryTask(tileTrajectory),
-                new SleepTask(300),
-                new TrajectoryTask(tileToStackTrajectory),
-                new SleepTask(600),
-                new PivotTask(PivotTask.Level.CONE_5),
-                new SleepTask(600),
-                new ClawTask(),
-                new SleepTask(600),
-                new AsyncTask(
-                    new TrajectoryTask(stackToMidTrajectory),
-                    new PivotTask(PivotTask.Level.MID)
-                ),
-                new SleepTask(300),
-                new TrajectoryTask(midForwardTrajectory),
-                new SleepTask(300),
-                new PivotTask(PivotTask.Level.DROP_MID),
-                new SleepTask(400),
-                new ClawTask(),
-                new SleepTask(300),
-                new TrajectoryTask(midBackwardTrajectory),
+//                new SleepTask(50),
+//                new AsyncTask(
+//                    new TrajectoryTask(startTrajectory),
+//                    new PivotTask(PivotTask.Level.MID)
+//                ),
+//                new PivotTask(PivotTask.Level.DROP_MID),
+//                new ClawTask(),
+//                new SleepTask(200),
+//                new TrajectoryTask(tileTrajectory),
+//                new SleepTask(300),
+//                new TrajectoryTask(tileToStackTrajectory),
+//                new SleepTask(600),
+//                new PivotTask(PivotTask.Level.CONE_5),
+//                new SleepTask(600),
+//                new ClawTask(),
+//                new SleepTask(600),
+//                new AsyncTask(
+//                    new TrajectoryTask(stackToMidTrajectory),
+//                    new PivotTask(PivotTask.Level.MID)
+//                ),
+//                new SleepTask(300),
+//                new TrajectoryTask(midForwardTrajectory),
+//                new SleepTask(300),
+//                new PivotTask(PivotTask.Level.DROP_MID),
+//                new SleepTask(400),
+//                new ClawTask(),
+//                new SleepTask(300),
+//                new TrajectoryTask(midBackwardTrajectory),
                 new InlineTask(() -> {
                     if (zone == 1) {
                         drive.followTrajectory(park1Trajectory);
