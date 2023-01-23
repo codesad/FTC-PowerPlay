@@ -30,6 +30,8 @@ public abstract class AutoOpMode extends ImplOpMode {
         if (aprilTag.getZone() != 0) {
             zone = aprilTag.getZone();
         }
+        telemetry.addData("Zone", zone);
+        telemetry.update();
     }
 
     @Override

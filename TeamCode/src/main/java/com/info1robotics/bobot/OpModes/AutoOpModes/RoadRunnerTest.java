@@ -49,6 +49,7 @@ public class RoadRunnerTest extends AutoOpMode {
     public Trajectory park3Trajectory;
     @Override
     public void onInit() {
+        super.onInit();
         claw.setPosition(ClawTask.closedPosition);
         clawOpen = false;
         drive.setPoseEstimate(new Pose2d(36.0, -72.0, Math.toRadians(START_HEADING)));

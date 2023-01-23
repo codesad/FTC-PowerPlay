@@ -1,5 +1,7 @@
 package com.info1robotics.bobot.OpModes.templates;
 
+import androidx.annotation.CallSuper;
+
 import com.info1robotics.bobot.Common.Mecanum;
 import com.info1robotics.bobot.roadrunner.drive.SampleMecanumDrive;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -19,6 +21,7 @@ public abstract class ImplOpMode extends LinearOpMode {
     public SampleMecanumDrive drive;
 
     public void onInitLoop() {}
+    @CallSuper
     public void onInit() {
         initHardwareMap();
     }
@@ -48,7 +51,7 @@ public abstract class ImplOpMode extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         initHardwareMap();
         onInit();
-        while (!isStarted()) {
+        while (!isStarted() && !isStopRequested()) {
             onInitLoop();
         }
         onStart();

@@ -55,6 +55,7 @@ public class RoadRunnerLeft extends AutoOpMode {
 
     @Override
     public void onInit() {
+        super.onInit();
         claw.setPosition(ClawTask.closedPosition);
         clawOpen = false;
         drive.setPoseEstimate(new Pose2d(-36.0, -72.0, Math.toRadians(START_HEADING)));
@@ -105,10 +106,6 @@ public class RoadRunnerLeft extends AutoOpMode {
                 new ClawTask(),
                 new SleepTask(200),
                 new TrajectoryTask(tileTrajectory),
-//                new SleepTask(300),
-//                new TrajectoryTask(pushTrajectory),
-//                new SleepTask(300),
-//                new TrajectoryTask(backTrajectory),
                 new SleepTask(300),
                 new TrajectoryTask(tileToStackTrajectory),
                 new SleepTask(600),
